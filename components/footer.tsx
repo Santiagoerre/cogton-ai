@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center">
               <LogoMark className="h-7 w-7" />
@@ -48,24 +48,6 @@ export function Footer() {
               <li>
                 <Link href="/contact" className="text-sm text-gray-500 hover:text-gray-900">
                   Contacto
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
-              Cuenta
-            </h3>
-            <ul className="mt-4 space-y-3">
-              <li>
-                <Link href="/sign-up" className="text-sm text-gray-500 hover:text-gray-900">
-                  Crear cuenta
-                </Link>
-              </li>
-              <li>
-                <Link href="/sign-in" className="text-sm text-gray-500 hover:text-gray-900">
-                  Iniciar sesión
                 </Link>
               </li>
             </ul>

@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, Home, LogOut, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { LogoMark } from '@/components/logo';
 import { products } from '@/lib/products';
 import {
@@ -12,14 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { signOut } from '@/app/(login)/actions';
-import { useRouter, usePathname } from 'next/navigation';
-import { User } from '@/lib/db/schema';
-import useSWR, { mutate } from 'swr';
+import { usePathname } from 'next/navigation';
 import { Footer } from '@/components/footer';
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const navLinks = [
   { href: '/', label: 'Inicio' },
@@ -67,55 +61,11 @@ function ProductMenu({ active }: { active: boolean }) {
   );
 }
 
-function UserMenu() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { data: user } = useSWR<User>('/api/user', fetcher);
-  const router = useRouter();
-
-  async function handleSignOut() {
-    await signOut();
-    mutate('/api/user');
-    router.push('/');
-  }
-
-  if (!user) {
-    return (
-      <Button asChild className="rounded-full">
-        <Link href="/contact">Agendar demo</Link>
-      </Button>
-    );
-  }
-
+function DemoButton() {
   return (
-    <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-      <DropdownMenuTrigger>
-        <Avatar className="cursor-pointer size-9">
-          <AvatarImage alt={user.name || ''} />
-          <AvatarFallback>
-            {user.email
-              .split(' ')
-              .map((n) => n[0])
-              .join('')}
-          </AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="flex flex-col gap-1">
-        <DropdownMenuItem className="cursor-pointer">
-          <Link href="/dashboard" className="flex w-full items-center">
-            <Home className="mr-2 h-4 w-4" />
-            <span>Dashboard</span>
-          </Link>
-        </DropdownMenuItem>
-        <form action={handleSignOut} className="w-full">
-          <button type="submit" className="flex w-full">
-            <DropdownMenuItem className="w-full flex-1 cursor-pointer">
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Sign out</span>
-            </DropdownMenuItem>
-          </button>
-        </form>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button asChild className="rounded-full">
+      <Link href="/contact">Agendar demo</Link>
+    </Button>
   );
 }
 
@@ -157,9 +107,7 @@ function Header() {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-          <Suspense fallback={<div className="h-9" />}>
-            <UserMenu />
-          </Suspense>
+          <DemoButton />
         </div>
 
         <button
@@ -206,9 +154,7 @@ function Header() {
             )
           )}
           <div className="pt-2">
-            <Suspense fallback={<div className="h-9" />}>
-              <UserMenu />
-            </Suspense>
+            <DemoButton />
           </div>
         </nav>
       )}
