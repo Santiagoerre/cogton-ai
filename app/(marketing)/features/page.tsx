@@ -1,6 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { CtaLink } from '@/components/marketing';
 import {
-  ArrowRight,
   PackageSearch,
   LineChart,
   Boxes,
@@ -8,7 +7,6 @@ import {
   Truck,
   Leaf
 } from 'lucide-react';
-import Link from 'next/link';
 
 const features = [
   {
@@ -52,7 +50,7 @@ const features = [
 export default function FeaturesPage() {
   return (
     <main>
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl">
             Todo lo que necesitás para optimizar tu embalaje
@@ -66,7 +64,7 @@ export default function FeaturesPage() {
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
               <div
                 key={feature.title}
@@ -100,12 +98,7 @@ export default function FeaturesPage() {
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">
-              <Link href="/contact">
-                <Button size="lg" className="text-lg rounded-full">
-                  Solicitar demo
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Button>
-              </Link>
+              <CtaLink href="/contact">Solicitar demo</CtaLink>
             </div>
           </div>
         </div>

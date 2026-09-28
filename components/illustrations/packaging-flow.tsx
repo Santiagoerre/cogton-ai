@@ -6,15 +6,15 @@ const attributes = [
 ];
 
 const savings = [
-  { value: '-31%', label: 'volumen', x: 208, w: 118 },
-  { value: '-18%', label: 'flete', x: 336, w: 110 },
-  { value: '1', label: 'caja por pedido', x: 456, w: 118 }
+  { value: '-31%', label: 'volumen', x: 208, w: 112 },
+  { value: '-18%', label: 'flete', x: 328, w: 96 },
+  { value: '1', label: 'caja por pedido', x: 432, w: 142 }
 ];
 
 export function PackagingFlowIllustration() {
   return (
     <svg
-      viewBox="0 0 600 430"
+      viewBox="16 32 582 390"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-auto"
@@ -35,7 +35,7 @@ export function PackagingFlowIllustration() {
       </defs>
 
       {/* ---------- Your operation ---------- */}
-      <text x="80" y="66" textAnchor="middle" fontSize="10" fontWeight="600" letterSpacing="1.5" fill="#6b7280">
+      <text x="80" y="66" textAnchor="middle" fontSize="11.5" fontWeight="600" letterSpacing="1.5" fill="#6b7280">
         TU OPERACIÓN
       </text>
       <g stroke="#374151" strokeWidth="1.5" strokeLinejoin="round">
@@ -46,7 +46,7 @@ export function PackagingFlowIllustration() {
         <path d="M92 151 L110 142 M92 157 L110 148 M92 163 L110 154" strokeWidth="1" />
       </g>
       <rect x="25" y="188" width="110" height="36" rx="10" fill="white" stroke="#d1d5db" />
-      <text x="80" y="211" textAnchor="middle" fontSize="13" fontWeight="600" fill="#111827">
+      <text x="80" y="211" textAnchor="middle" fontSize="15" fontWeight="600" fill="#111827">
         Tu WMS
       </text>
 
@@ -63,12 +63,12 @@ export function PackagingFlowIllustration() {
 
       {/* ---------- AI analysis panel ---------- */}
       <rect x="190" y="40" width="400" height="250" rx="16" fill="#ecfdf5" stroke="#a7f3d0" />
-      <text x="208" y="70" fontSize="12" fontWeight="700" fill="#047857">
+      <text x="208" y="71" fontSize="14" fontWeight="700" fill="#047857">
         Análisis de producto con IA
       </text>
-      <rect x="486" y="55" width="88" height="22" rx="11" fill="white" stroke="#6ee7b7" />
-      <circle cx="499" cy="66" r="4" fill="#10b981" />
-      <text x="508" y="70" fontSize="11" fontWeight="600" fill="#065f46">
+      <rect x="480" y="54" width="94" height="24" rx="12" fill="white" stroke="#6ee7b7" />
+      <circle cx="494" cy="66" r="4" fill="#10b981" />
+      <text x="503" y="70.5" fontSize="12.5" fontWeight="600" fill="#065f46">
         Cogton AI
       </text>
 
@@ -83,7 +83,7 @@ export function PackagingFlowIllustration() {
             className="pf-pulse"
             style={{ animationDelay: `${i * 0.4}s` }}
           />
-          <text x="236" y={y + 23} fontSize="12" fontWeight="600" fill="#111827">
+          <text x="234" y={y + 24} fontSize="14" fontWeight="600" fill="#111827">
             {label}
           </text>
           {/* attribute rows -> recommendation */}
@@ -97,7 +97,7 @@ export function PackagingFlowIllustration() {
 
       {/* recommendation card */}
       <rect x="370" y="88" width="204" height="182" rx="12" fill="white" stroke="#d1fae5" />
-      <text x="386" y="111" fontSize="9.5" fontWeight="700" letterSpacing="1.2" fill="#6b7280">
+      <text x="386" y="111" fontSize="11" fontWeight="700" letterSpacing="1" fill="#6b7280">
         EMBALAJE RECOMENDADO
       </text>
 
@@ -106,7 +106,7 @@ export function PackagingFlowIllustration() {
         <rect x="382" y="122" width="180" height="38" rx="8" fill="#f9fafb" stroke="#e5e7eb" />
         <rect x="394" y="132" width="22" height="18" rx="2" stroke="#6b7280" strokeWidth="1.4" />
         <path d="M394 137 H416 M405 132 V150" stroke="#6b7280" strokeWidth="1" />
-        <text x="428" y="145" fontSize="12" fill="#374151">Caja</text>
+        <text x="426" y="146" fontSize="14" fill="#374151">Caja</text>
       </g>
 
       {/* poly mailer (selected) */}
@@ -118,7 +118,7 @@ export function PackagingFlowIllustration() {
         strokeLinejoin="round"
         fill="white"
       />
-      <text x="428" y="192" fontSize="12" fontWeight="700" fill="#065f46">
+      <text x="426" y="193" fontSize="14" fontWeight="700" fill="#065f46">
         Bolsa mailer
       </text>
       <circle cx="544" cy="188" r="9" fill="#10b981" />
@@ -129,20 +129,20 @@ export function PackagingFlowIllustration() {
         <rect x="382" y="216" width="180" height="38" rx="8" fill="#f9fafb" stroke="#e5e7eb" />
         <rect x="394" y="227" width="22" height="16" rx="2" stroke="#6b7280" strokeWidth="1.4" />
         <path d="M394 228 L405 236 L416 228" stroke="#6b7280" strokeWidth="1" />
-        <text x="428" y="239" fontSize="12" fill="#374151">Sobre acolchado</text>
+        <text x="426" y="240" fontSize="14" fill="#374151">Sobre acolchado</text>
       </g>
 
       {/* ---------- Savings panel ---------- */}
       <rect x="190" y="310" width="400" height="104" rx="16" fill="#fffbeb" stroke="#fde68a" />
-      <text x="208" y="338" fontSize="12" fontWeight="700" fill="#b45309">
+      <text x="208" y="339" fontSize="14" fontWeight="700" fill="#b45309">
         Ahorro en cada envío
       </text>
       {savings.map(({ value, label, x, w }) => (
         <g key={label}>
           <rect x={x} y="352" width={w} height="42" rx="9" fill="white" stroke="#fde68a" />
-          <text x={x + 12} y="378" fontSize="12" fill="#374151">
-            <tspan fontSize="14" fontWeight="700" fill="#b45309">{value}</tspan>
-            <tspan dx="5">{label}</tspan>
+          <text x={x + 10} y="378.5" fontSize="13.5" fill="#374151">
+            <tspan fontSize="16" fontWeight="700" fill="#b45309">{value}</tspan>
+            <tspan dx="4">{label}</tspan>
           </text>
         </g>
       ))}

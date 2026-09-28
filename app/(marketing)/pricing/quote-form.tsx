@@ -1,7 +1,6 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { CtaArrow, ctaClassName } from '@/components/marketing';
 
 const CONTACT_EMAIL = 'info@cogton.com';
 
@@ -13,7 +12,7 @@ const goals = [
 ];
 
 const inputClass =
-  'mt-2 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder:text-gray-400 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100';
+  'mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100';
 
 export function QuoteForm() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -82,7 +81,7 @@ export function QuoteForm() {
                 type="checkbox"
                 name="goals"
                 value={goal}
-                className="h-4 w-4 accent-emerald-600"
+                className="h-5 w-5 accent-emerald-600"
               />
               {goal}
             </label>
@@ -100,20 +99,20 @@ export function QuoteForm() {
         />
       </label>
 
-      <label className="mt-6 flex items-start gap-3 text-sm text-gray-600">
+      <label className="mt-6 flex cursor-pointer items-start gap-3 text-sm text-gray-600">
         <input
           type="checkbox"
           name="consent"
           required
-          className="mt-0.5 h-4 w-4 flex-shrink-0 accent-emerald-600"
+          className="h-5 w-5 flex-shrink-0 accent-emerald-600"
         />
         Acepto que Cogton AI guarde y procese mis datos para contactarme.
       </label>
 
-      <Button type="submit" size="lg" className="mt-8 w-full rounded-full text-base sm:w-auto">
+      <button type="submit" className={ctaClassName('green', 'mt-8 cursor-pointer')}>
         Agendar una llamada
-        <ArrowRight className="ml-2 h-5 w-5" />
-      </Button>
+        <CtaArrow />
+      </button>
     </form>
   );
 }

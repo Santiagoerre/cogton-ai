@@ -34,7 +34,7 @@ export function SavingsCalculator() {
             step={1000}
             value={orders}
             onChange={(e) => setOrders(Number(e.target.value))}
-            className="mt-3 w-full accent-emerald-600"
+            className="mt-3 h-8 w-full accent-emerald-600"
           />
           <div className="mt-1 flex justify-between text-xs text-gray-400">
             <span>1.000</span>
@@ -51,11 +51,12 @@ export function SavingsCalculator() {
             <input
               id="freight"
               type="number"
+              inputMode="decimal"
               min={0}
               step={0.5}
               value={avgFreight}
               onChange={(e) => setAvgFreight(Math.max(0, Number(e.target.value)))}
-              className="w-full bg-transparent px-2 py-2 text-gray-900 outline-none"
+              className="w-full bg-transparent px-2 py-3 text-base text-gray-900 outline-none"
             />
           </div>
         </div>
@@ -66,7 +67,7 @@ export function SavingsCalculator() {
           <p className="text-sm font-medium text-emerald-800">
             Ahorro estimado en flete
           </p>
-          <p className="mt-2 text-4xl font-bold text-emerald-700">
+          <p className="mt-2 text-3xl font-bold text-emerald-700 sm:text-4xl">
             ${formatNumber(monthly)}
             <span className="text-lg font-medium text-emerald-800"> / mes</span>
           </p>

@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { LogoMark } from '@/components/logo';
 import { products } from '@/lib/products';
@@ -61,11 +60,14 @@ function ProductMenu({ active }: { active: boolean }) {
   );
 }
 
-function DemoButton() {
+function DemoButton({ className = '' }: { className?: string }) {
   return (
-    <Button asChild className="rounded-full">
-      <Link href="/contact">Agendar demo</Link>
-    </Button>
+    <Link
+      href="/contact"
+      className={`inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-600 px-4 text-sm font-semibold text-white shadow-md shadow-emerald-900/15 ring-1 ring-inset ring-white/15 transition-colors outline-none hover:from-emerald-600 hover:to-emerald-700 focus-visible:ring-4 focus-visible:ring-emerald-200 ${className}`}
+    >
+      Agendar demo
+    </Link>
   );
 }
 
@@ -73,9 +75,12 @@ function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathname = usePathname();
 
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => setIsNavOpen(false), [pathname]);
+
   return (
     <header className="border-b border-gray-200 bg-white sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center">
           <LogoMark className="h-7 w-7" />
           <span className="ml-2 text-xl font-semibold text-gray-900">
@@ -111,20 +116,26 @@ function Header() {
         </div>
 
         <button
-          className="md:hidden p-2 text-gray-700"
+          type="button"
+          className="md:hidden -mr-2 p-2 text-gray-700"
           onClick={() => setIsNavOpen((open) => !open)}
-          aria-label="Abrir menú"
+          aria-label={isNavOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={isNavOpen}
+          aria-controls="mobile-nav"
         >
           {isNavOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {isNavOpen && (
-        <nav className="md:hidden border-t border-gray-200 px-4 py-4 space-y-3 bg-white">
+        <nav
+          id="mobile-nav"
+          className="md:hidden border-t border-gray-200 px-4 pt-2 pb-4 bg-white max-h-[calc(100dvh-65px)] overflow-y-auto"
+        >
           {navLinks.map((link) =>
             link.children ? (
-              <div key={link.href} className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+              <div key={link.href} className="py-2">
+                <p className="py-1 text-xs font-semibold uppercase tracking-wider text-gray-400">
                   {link.label}
                 </p>
                 {link.children.map((child) => (
@@ -132,7 +143,7 @@ function Header() {
                     key={child.href}
                     href={child.href}
                     onClick={() => setIsNavOpen(false)}
-                    className={`block pl-3 text-base font-medium ${
+                    className={`block py-2.5 pl-3 text-base font-medium ${
                       pathname === child.href ? 'text-emerald-600' : 'text-gray-700'
                     }`}
                   >
@@ -145,7 +156,7 @@ function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsNavOpen(false)}
-                className={`block text-base font-medium ${
+                className={`block py-2.5 text-base font-medium ${
                   pathname === link.href ? 'text-emerald-600' : 'text-gray-700'
                 }`}
               >
@@ -153,8 +164,8 @@ function Header() {
               </Link>
             )
           )}
-          <div className="pt-2">
-            <DemoButton />
+          <div className="pt-3">
+            <DemoButton className="w-full" />
           </div>
         </nav>
       )}

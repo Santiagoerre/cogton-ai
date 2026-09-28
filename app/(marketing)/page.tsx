@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
   ArrowRight,
   Check,
@@ -15,7 +14,7 @@ import {
   OptimizeIcon,
   SaveIcon
 } from '@/components/illustrations/step-icons';
-import { CtaBanner, SectionHeading } from '@/components/marketing';
+import { CtaBanner, CtaLink, SectionHeading } from '@/components/marketing';
 import { Marquee } from '@/components/marquee';
 
 const wmsPlatforms = [
@@ -109,7 +108,7 @@ const reasons = [
 export default function HomePage() {
   return (
     <main className="bg-white">
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
@@ -117,33 +116,27 @@ export default function HomePage() {
                 El embalaje correcto,
                 <span className="block text-emerald-600">automáticamente</span>
               </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Cogton AI elige la caja justa para cada pedido y el embalaje
-                ideal para cada producto de tu catálogo. Menos cartón, menos
-                relleno y menos flete en cada envío, conectado a tu WMS.
+              <p className="mt-4 text-lg text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                La caja justa para cada pedido y el embalaje ideal para cada
+                producto. Menos cartón, relleno y flete, conectado a tu WMS.
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0 flex flex-col sm:flex-row gap-3 sm:justify-center lg:justify-start">
-                <Link href="/pricing#cotizar">
-                  <Button size="lg" className="text-lg rounded-full w-full sm:w-auto">
-                    Solicitar demo
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
+                <CtaLink href="/pricing#cotizar">Solicitar demo</CtaLink>
               </div>
             </div>
-            <div className="mt-12 lg:mt-0 lg:col-span-6 lg:flex lg:items-center">
+            <div className="-mx-3 mt-10 sm:mx-0 sm:mt-12 lg:mt-0 lg:col-span-6 lg:flex lg:items-center">
               <PackagingFlowIllustration />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-10 bg-white border-y border-gray-100">
+      <section className="py-6 sm:py-10 bg-white border-y border-gray-100">
         <Marquee duration={60}>
           {wmsPlatforms.map((name) => (
             <span
               key={name}
-              className="mx-8 text-lg font-semibold text-gray-400 whitespace-nowrap"
+              className="mx-5 text-base font-semibold text-gray-400 sm:mx-8 sm:text-lg whitespace-nowrap"
             >
               {name}
             </span>
@@ -151,28 +144,28 @@ export default function HomePage() {
         </Marquee>
       </section>
 
-      <section id="productos" className="bg-gray-50 py-20 scroll-mt-16">
+      <section id="productos" className="bg-gray-50 py-14 sm:py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Productos"
             title="Dos formas de optimizar tu embalaje"
             subtitle="Usalos por separado o juntos: uno decide en cada pedido, el otro rediseña tu catálogo."
           />
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
             {productCards.map((product) => (
               <Link
                 key={product.href}
                 href={product.href}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white transition-shadow hover:shadow-xl hover:shadow-gray-200/70"
               >
-                <div className="flex items-center bg-gradient-to-b from-emerald-50 to-white px-6 pt-8 pb-2 sm:px-10 lg:h-[26rem]">
+                <div className="flex items-center bg-gradient-to-b from-emerald-50 to-white px-4 pt-6 pb-2 sm:px-10 sm:pt-8 lg:h-[26rem]">
                   <div className="mx-auto w-full max-w-md">{product.visual}</div>
                 </div>
-                <div className="flex flex-1 flex-col p-8 sm:p-10">
+                <div className="flex flex-1 flex-col p-6 sm:p-10">
                   <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
                     {product.label}
                   </p>
-                  <h3 className="mt-3 text-2xl font-bold text-gray-900">
+                  <h3 className="mt-3 text-xl font-bold text-gray-900 sm:text-2xl">
                     {product.name}
                   </h3>
                   <p className="mt-1 text-lg font-medium text-gray-700">
@@ -200,14 +193,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Cómo funciona"
             title="Mejor juntos"
             subtitle="El catálogo correcto, y la caja correcta de ese catálogo en cada pedido."
           />
-          <div className="grid gap-10 sm:grid-cols-3 relative">
+          <div className="grid gap-8 sm:gap-10 sm:grid-cols-3 relative">
             <div
               className="hidden sm:block absolute top-7 left-[16.5%] right-[16.5%] border-t-2 border-dashed border-emerald-200"
               aria-hidden
@@ -227,7 +220,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Por qué Cogton"
@@ -235,7 +228,7 @@ export default function HomePage() {
           />
           <div className="grid gap-6 md:grid-cols-3">
             {reasons.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="rounded-2xl border border-gray-200 bg-white p-8">
+              <div key={title} className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-600 text-white">
                   <Icon className="h-6 w-6" />
                 </div>

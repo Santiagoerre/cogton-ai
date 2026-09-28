@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button';
+import { CtaArrow, ctaClassName } from '@/components/marketing';
 import { Mail, Linkedin, Calendar } from 'lucide-react';
 
 const CONTACT_EMAIL = 'info@cogton.com';
 
 export default function ContactPage() {
   return (
-    <main className="py-16">
+    <main className="py-12 sm:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl">
           Hablemos
@@ -16,8 +16,8 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="mt-12 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-3">
+      <div className="mt-10 sm:mt-12 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-3">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="rounded-xl border border-gray-200 p-6 text-center hover:border-emerald-600 transition-colors"
@@ -54,10 +54,12 @@ export default function ContactPage() {
           <p className="text-gray-500">
             ¿Preferís que te escribamos nosotros?
           </p>
-          <a href={`mailto:${CONTACT_EMAIL}?subject=Demo%20Cogton%20AI`}>
-            <Button size="lg" className="mt-4 rounded-full">
-              Escribinos por email
-            </Button>
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=Demo%20Cogton%20AI`}
+            className={ctaClassName('green', 'mt-4')}
+          >
+            Escribinos por email
+            <CtaArrow />
           </a>
         </div>
       </div>

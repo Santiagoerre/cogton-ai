@@ -61,7 +61,7 @@ export default function CatalogueOptimiserPage() {
         visual={<CatalogueVisual />}
       />
 
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Dos niveles"
@@ -69,7 +69,7 @@ export default function CatalogueOptimiserPage() {
           />
           <div className="grid gap-6 md:grid-cols-2">
             {levels.map(({ icon: Icon, label, title, description, points }) => (
-              <div key={title} className="rounded-2xl border border-gray-200 p-8 sm:p-10">
+              <div key={title} className="rounded-2xl border border-gray-200 p-6 sm:p-10">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
                     <Icon className="h-5 w-5" />
@@ -94,7 +94,7 @@ export default function CatalogueOptimiserPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">

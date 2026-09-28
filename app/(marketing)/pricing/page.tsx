@@ -85,7 +85,7 @@ export default function PricingPage() {
   return (
     <main className="bg-white">
       <section className="bg-gradient-to-b from-emerald-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-14 sm:pt-24 sm:pb-16">
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
             Precios
           </p>
@@ -113,7 +113,7 @@ export default function PricingPage() {
           <div className="lg:col-span-7">
             <QuoteForm />
           </div>
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8 sm:p-10 lg:col-span-5 lg:sticky lg:top-24">
+          <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-6 sm:p-10 lg:col-span-5 lg:sticky lg:top-24">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">
               Cómo se define tu precio
             </h2>
@@ -133,7 +133,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="¿Cuánto podrías ahorrar?"
@@ -143,7 +143,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Proceso"
@@ -154,7 +154,7 @@ export default function PricingPage() {
             {steps.map(({ title, description }, i) => (
               <li
                 key={title}
-                className="rounded-2xl border border-gray-200 bg-white p-8"
+                className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-emerald-300 bg-white text-lg font-semibold text-gray-900 shadow-md shadow-emerald-100">
                   {i + 1}
@@ -171,18 +171,18 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-20 sm:py-24">
+      <section className="bg-slate-50 py-14 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="text-sm font-semibold text-emerald-600">FAQ</p>
-            <h2 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:mt-4 sm:text-5xl">
               ¿Preguntas?
             </h2>
           </div>
           <div className="divide-y divide-gray-200 border-b border-gray-200 lg:col-span-8">
             {faqs.map(({ question, answer }) => (
-              <details key={question} className="group py-7 first:pt-0">
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-lg font-semibold text-gray-900 sm:text-xl [&::-webkit-details-marker]:hidden">
+              <details key={question} className="group py-5 first:pt-0 sm:py-7">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-semibold sm:gap-6 text-gray-900 sm:text-xl [&::-webkit-details-marker]:hidden">
                   {question}
                   <Plus className="mt-1 h-5 w-5 flex-shrink-0 text-gray-700 transition-transform duration-200 group-open:rotate-45" />
                 </summary>
