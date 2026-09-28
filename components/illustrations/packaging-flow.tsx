@@ -29,12 +29,11 @@ export function PackagingFlowIllustration() {
         .pf-pulse { animation: pf-pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
         @keyframes pf-flow { to { stroke-dashoffset: -18; } }
         @keyframes pf-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
-        /* Story on an 8s loop: attributes light up, mailer gets picked, savings appear. */
-        .pf-attr, .pf-pick, .pf-check, .pf-save { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+        /* Story on an 8s loop: attributes light up, then the mailer gets picked. */
+        .pf-attr, .pf-pick, .pf-check { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
         .pf-attr { animation-name: pf-attr; }
         .pf-pick { animation-name: pf-pick; }
         .pf-check { animation-name: pf-check; transform-box: fill-box; transform-origin: center; }
-        .pf-save { animation-name: pf-save; }
         @keyframes pf-attr { 0% { opacity: 0; } 5%, 80% { opacity: 1; } 88%, 100% { opacity: 0; } }
         @keyframes pf-pick { 0%, 30% { opacity: 0; } 36%, 84% { opacity: 1; } 92%, 100% { opacity: 0; } }
         @keyframes pf-check {
@@ -43,14 +42,9 @@ export function PackagingFlowIllustration() {
           44%, 84% { opacity: 1; transform: scale(1); }
           92%, 100% { opacity: 0; transform: scale(1); }
         }
-        @keyframes pf-save {
-          0%, 46% { opacity: 0; transform: translateY(6px); }
-          53%, 86% { opacity: 1; transform: translateY(0); }
-          94%, 100% { opacity: 0; transform: translateY(0); }
-        }
         @media (prefers-reduced-motion: reduce) {
           .pf-flow, .pf-pulse { animation: none; }
-          .pf-attr, .pf-pick, .pf-check, .pf-save { animation: none; opacity: 1; transform: none; }
+          .pf-attr, .pf-pick, .pf-check { animation: none; opacity: 1; transform: none; }
         }
       `}</style>
       <defs>
@@ -177,8 +171,8 @@ export function PackagingFlowIllustration() {
       <text x="208" y="339" fontSize="14" fontWeight="700" fill="#b45309">
         Ahorro en cada envío
       </text>
-      {savings.map(({ value, label, x, w }, i) => (
-        <g key={label} className="pf-save" style={{ animationDelay: `${i * 0.25}s` }}>
+      {savings.map(({ value, label, x, w }) => (
+        <g key={label}>
           <rect x={x} y="352" width={w} height="42" rx="9" fill="white" stroke="#fde68a" />
           <text x={x + 10} y="378.5" fontSize="13.5" fill="#374151">
             <tspan fontSize="16" fontWeight="700" fill="#b45309">{value}</tspan>
