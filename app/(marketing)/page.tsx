@@ -108,15 +108,24 @@ const reasons = [
 export default function HomePage() {
   return (
     <main className="bg-white">
-      <section className="py-14 sm:py-20">
+      <section className="relative isolate overflow-hidden py-14 sm:py-20 lg:py-24">
+        {/* dot grid that fades out, plus a soft glow behind the diagram */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(#d1d5db_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_80%_45%_at_50%_75%,black,transparent)] lg:[mask-image:radial-gradient(ellipse_55%_70%_at_72%_50%,black,transparent)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[58%] -z-10 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-emerald-200/20 blur-3xl lg:left-[72%] lg:top-1/2 lg:h-[38rem] lg:w-[38rem] lg:-translate-y-1/2"
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-12">
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-              <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl md:text-6xl">
+              <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl md:text-6xl lg:text-[2.75rem] lg:leading-[1.08] xl:text-[3.25rem]">
                 El embalaje correcto,
                 <span className="block text-emerald-600">automáticamente</span>
               </h1>
-              <p className="mt-4 text-lg text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+              <p className="mt-4 text-lg text-gray-500 sm:mt-6 sm:text-xl lg:max-w-lg">
                 La caja justa para cada pedido y el embalaje ideal para cada
                 producto. Menos cartón, relleno y flete, conectado a tu WMS.
               </p>
@@ -124,14 +133,36 @@ export default function HomePage() {
                 <CtaLink href="/pricing#cotizar">Solicitar demo</CtaLink>
               </div>
             </div>
-            <div className="-mx-3 mt-10 sm:mx-0 sm:mt-12 lg:mt-0 lg:col-span-6 lg:flex lg:items-center">
-              <PackagingFlowIllustration />
+            <div className="-mx-2 mt-10 sm:mx-0 sm:mt-12 lg:mt-0 lg:col-span-6 lg:ml-auto lg:w-full lg:max-w-[600px]">
+              <div className="overflow-hidden rounded-2xl bg-white/90 shadow-2xl shadow-emerald-900/10 ring-1 ring-gray-900/5 backdrop-blur">
+                <div className="flex items-center gap-1.5 border-b border-gray-100 px-4 py-2.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-gray-200" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-gray-200" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-gray-200" />
+                  <span className="ml-3 truncate text-xs font-medium text-gray-500">
+                    Cogton AI · Recomendación de embalaje
+                  </span>
+                  <span className="ml-auto flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60 motion-reduce:animate-none" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                    </span>
+                    En vivo
+                  </span>
+                </div>
+                <div className="p-1.5 sm:p-4">
+                  <PackagingFlowIllustration />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="py-6 sm:py-10 bg-white border-y border-gray-100">
+        <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-gray-400 sm:mb-6">
+          Se integra con
+        </p>
         <Marquee duration={60}>
           {wmsPlatforms.map((name) => (
             <span

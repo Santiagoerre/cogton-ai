@@ -11,6 +11,9 @@ const savings = [
   { value: '1', label: 'caja por pedido', x: 432, w: 142 }
 ];
 
+const mailerPath =
+  'M395 180 Q394 180 394 182 V196 Q394 198 396 198 H414 Q416 198 416 196 V182 Q416 180 414 180 H408 L405 176 H398 Z';
+
 export function PackagingFlowIllustration() {
   return (
     <svg
@@ -26,7 +29,29 @@ export function PackagingFlowIllustration() {
         .pf-pulse { animation: pf-pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
         @keyframes pf-flow { to { stroke-dashoffset: -18; } }
         @keyframes pf-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
-        @media (prefers-reduced-motion: reduce) { .pf-flow, .pf-pulse { animation: none; } }
+        /* Story on an 8s loop: attributes light up, mailer gets picked, savings appear. */
+        .pf-attr, .pf-pick, .pf-check, .pf-save { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+        .pf-attr { animation-name: pf-attr; }
+        .pf-pick { animation-name: pf-pick; }
+        .pf-check { animation-name: pf-check; transform-box: fill-box; transform-origin: center; }
+        .pf-save { animation-name: pf-save; }
+        @keyframes pf-attr { 0% { opacity: 0; } 5%, 80% { opacity: 1; } 88%, 100% { opacity: 0; } }
+        @keyframes pf-pick { 0%, 30% { opacity: 0; } 36%, 84% { opacity: 1; } 92%, 100% { opacity: 0; } }
+        @keyframes pf-check {
+          0%, 34% { opacity: 0; transform: scale(0.4); }
+          40% { opacity: 1; transform: scale(1.15); }
+          44%, 84% { opacity: 1; transform: scale(1); }
+          92%, 100% { opacity: 0; transform: scale(1); }
+        }
+        @keyframes pf-save {
+          0%, 46% { opacity: 0; transform: translateY(6px); }
+          53%, 86% { opacity: 1; transform: translateY(0); }
+          94%, 100% { opacity: 0; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .pf-flow, .pf-pulse { animation: none; }
+          .pf-attr, .pf-pick, .pf-check, .pf-save { animation: none; opacity: 1; transform: none; }
+        }
       `}</style>
       <defs>
         <marker id="pf-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -75,6 +100,18 @@ export function PackagingFlowIllustration() {
       {attributes.map(({ label, y }, i) => (
         <g key={label}>
           <rect x="208" y={y} width="130" height="38" rx="9" fill="white" stroke="#d1fae5" />
+          <rect
+            x="208"
+            y={y}
+            width="130"
+            height="38"
+            rx="9"
+            fill="#f0fdf4"
+            stroke="#10b981"
+            strokeWidth="1.5"
+            className="pf-attr"
+            style={{ animationDelay: `${i * 0.45}s` }}
+          />
           <circle
             cx="224"
             cy={y + 19}
@@ -109,20 +146,23 @@ export function PackagingFlowIllustration() {
         <text x="426" y="146" fontSize="14" fill="#374151">Caja</text>
       </g>
 
-      {/* poly mailer (selected) */}
-      <rect x="382" y="168" width="180" height="40" rx="8" fill="#ecfdf5" stroke="#10b981" strokeWidth="1.5" />
-      <path
-        d="M395 180 Q394 180 394 182 V196 Q394 198 396 198 H414 Q416 198 416 196 V182 Q416 180 414 180 H408 L405 176 H398 Z"
-        stroke="#059669"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-        fill="white"
-      />
-      <text x="426" y="193" fontSize="14" fontWeight="700" fill="#065f46">
-        Bolsa mailer
-      </text>
-      <circle cx="544" cy="188" r="9" fill="#10b981" />
-      <path d="M539.5 188 L542.5 191 L548.5 185" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      {/* poly mailer: neutral until the recommendation lands */}
+      <g opacity="0.45">
+        <rect x="382" y="168" width="180" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb" />
+        <path d={mailerPath} stroke="#6b7280" strokeWidth="1.4" strokeLinejoin="round" />
+        <text x="426" y="193" fontSize="14" fill="#374151">Bolsa mailer</text>
+      </g>
+      <g className="pf-pick">
+        <rect x="382" y="168" width="180" height="40" rx="8" fill="#ecfdf5" stroke="#10b981" strokeWidth="1.5" />
+        <path d={mailerPath} stroke="#059669" strokeWidth="1.4" strokeLinejoin="round" fill="white" />
+        <text x="426" y="193" fontSize="14" fontWeight="700" fill="#065f46">
+          Bolsa mailer
+        </text>
+      </g>
+      <g className="pf-check">
+        <circle cx="544" cy="188" r="9" fill="#10b981" />
+        <path d="M539.5 188 L542.5 191 L548.5 185" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
 
       {/* padded envelope (not selected) */}
       <g opacity="0.45">
@@ -137,8 +177,8 @@ export function PackagingFlowIllustration() {
       <text x="208" y="339" fontSize="14" fontWeight="700" fill="#b45309">
         Ahorro en cada envío
       </text>
-      {savings.map(({ value, label, x, w }) => (
-        <g key={label}>
+      {savings.map(({ value, label, x, w }, i) => (
+        <g key={label} className="pf-save" style={{ animationDelay: `${i * 0.25}s` }}>
           <rect x={x} y="352" width={w} height="42" rx="9" fill="white" stroke="#fde68a" />
           <text x={x + 10} y="378.5" fontSize="13.5" fill="#374151">
             <tspan fontSize="16" fontWeight="700" fill="#b45309">{value}</tspan>
