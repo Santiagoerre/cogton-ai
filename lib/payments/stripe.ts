@@ -7,8 +7,27 @@ import {
   updateTeamSubscription
 } from '@/lib/db/queries';
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-04-30.basil'
+let stripeInstance: Stripe | undefined;
+
+// Instantiate lazily so `next build` doesn't require STRIPE_SECRET_KEY.
+function getStripe() {
+  if (!stripeInstance) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY environment variable is not set');
+    }
+    stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-04-30.basil'
+    });
+  }
+  return stripeInstance;
+}
+
+export const stripe = new Proxy({} as Stripe, {
+  get(_target, prop) {
+    const real = getStripe();
+    const value = Reflect.get(real, prop, real);
+    return typeof value === 'function' ? value.bind(real) : value;
+  }
 });
 
 export async function createCheckoutSession({
