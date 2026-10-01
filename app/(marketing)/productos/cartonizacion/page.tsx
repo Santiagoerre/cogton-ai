@@ -1,3 +1,4 @@
+import { DEMO_BOOKING_URL } from '@/lib/contact';
 import type { Metadata } from 'next';
 import {
   ArrowUp,
@@ -145,7 +146,7 @@ export default async function CartonizationPage() {
       <CtaBanner
         title={t.ctaTitle}
         subtitle={t.ctaSubtitle}
-        href="/pricing#cotizar"
+        href={DEMO_BOOKING_URL}
         label={t.ctaLabel}
       />
     </main>

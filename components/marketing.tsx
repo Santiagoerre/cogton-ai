@@ -1,5 +1,6 @@
 import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
+import { DEMO_BOOKING_URL } from '@/lib/contact';
 import { cn } from '@/lib/utils';
 
 const ctaTones = {
@@ -50,7 +51,11 @@ export function CtaLink({
   className?: string;
 }) {
   return (
-    <Link href={href} className={ctaClassName(tone, className)}>
+    <Link
+      href={href}
+      className={ctaClassName(tone, className)}
+      {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    >
       {children}
       <CtaArrow tone={tone} />
     </Link>
@@ -174,7 +179,7 @@ export function ProductHero({
             {intro}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CtaLink href="/pricing#cotizar">{demoLabel}</CtaLink>
+            <CtaLink href={DEMO_BOOKING_URL}>{demoLabel}</CtaLink>
             <Link
               href="/pricing"
               className="inline-flex h-14 w-full items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 text-lg font-semibold text-gray-900 transition-colors outline-none hover:border-gray-400 hover:bg-gray-50 focus-visible:ring-4 focus-visible:ring-emerald-100 sm:w-auto"

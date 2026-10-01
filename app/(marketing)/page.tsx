@@ -1,3 +1,4 @@
+import { DEMO_BOOKING_URL } from '@/lib/contact';
 import {
   ArrowRight,
   Check,
@@ -78,7 +79,7 @@ export default async function HomePage() {
                 {t.heroBody}
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0 flex flex-col sm:flex-row gap-3 sm:justify-center lg:justify-start">
-                <CtaLink href="/pricing#cotizar">{common.demoRequest}</CtaLink>
+                <CtaLink href={DEMO_BOOKING_URL}>{common.demoRequest}</CtaLink>
               </div>
             </div>
             <div className="-mx-2 mt-10 sm:mx-0 sm:mt-12 lg:mt-0 lg:col-span-6 lg:ml-auto lg:w-full lg:max-w-[600px]">
@@ -234,7 +235,7 @@ export default async function HomePage() {
       <CtaBanner
         title={t.ctaTitle}
         subtitle={t.ctaSubtitle}
-        href="/pricing#cotizar"
+        href={DEMO_BOOKING_URL}
         label={common.demoRequest}
       />
     </main>

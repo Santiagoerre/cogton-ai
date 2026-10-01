@@ -1,3 +1,4 @@
+import { DEMO_BOOKING_URL } from '@/lib/contact';
 import { CtaLink } from '@/components/marketing';
 import { getDict } from '@/lib/i18n/server';
 import {
@@ -63,7 +64,7 @@ export default async function FeaturesPage() {
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">
-              <CtaLink href="/contact">{common.demoRequest}</CtaLink>
+              <CtaLink href={DEMO_BOOKING_URL}>{common.demoRequest}</CtaLink>
             </div>
           </div>
         </div>

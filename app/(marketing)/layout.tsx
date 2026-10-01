@@ -6,6 +6,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { LogoMark } from '@/components/logo';
 import { localizeProducts } from '@/lib/products';
 import { LanguageToggle } from '@/components/language-toggle';
+import { DEMO_BOOKING_URL } from '@/lib/contact';
 import { useDict } from '@/lib/i18n/client';
 import {
   DropdownMenu,
@@ -70,12 +71,14 @@ function ProductMenu({ active }: { active: boolean }) {
 function DemoButton({ className = '' }: { className?: string }) {
   const { header } = useDict();
   return (
-    <Link
-      href="/contact"
+    <a
+      href={DEMO_BOOKING_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-600 px-4 text-sm font-semibold text-white shadow-md shadow-emerald-900/15 ring-1 ring-inset ring-white/15 transition-colors outline-none hover:from-emerald-600 hover:to-emerald-700 focus-visible:ring-4 focus-visible:ring-emerald-200 ${className}`}
     >
       {header.bookDemo}
-    </Link>
+    </a>
   );
 }
 

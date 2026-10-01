@@ -1,3 +1,4 @@
+import { DEMO_BOOKING_URL } from '@/lib/contact';
 import type { Metadata } from 'next';
 import { Boxes, Check, FileCheck2, Tags } from 'lucide-react';
 import {
@@ -102,7 +103,7 @@ export default async function CatalogueOptimiserPage() {
       <CtaBanner
         title={t.ctaTitle}
         subtitle={t.ctaSubtitle}
-        href="/pricing#cotizar"
+        href={DEMO_BOOKING_URL}
         label={t.ctaLabel}
       />
     </main>
