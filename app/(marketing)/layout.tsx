@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { LogoMark } from '@/components/logo';
-import { products } from '@/lib/products';
+import { localizeProducts } from '@/lib/products';
+import { LanguageToggle } from '@/components/language-toggle';
+import { useDict } from '@/lib/i18n/client';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,14 +16,19 @@ import {
 import { usePathname } from 'next/navigation';
 import { Footer } from '@/components/footer';
 
-const navLinks = [
-  { href: '/', label: 'Inicio' },
-  { href: '/productos', label: 'Producto', children: products },
-  { href: '/pricing', label: 'Precios' },
-  { href: '/contact', label: 'Contacto' }
-];
+function useNavLinks() {
+  const { header, products } = useDict();
+  return [
+    { href: '/', label: header.home },
+    { href: '/productos', label: header.product, children: localizeProducts(products) },
+    { href: '/pricing', label: header.pricing },
+    { href: '/contact', label: header.contact }
+  ];
+}
 
 function ProductMenu({ active }: { active: boolean }) {
+  const { header, products: productTexts } = useDict();
+  const products = localizeProducts(productTexts);
   // Radix generates ids that differ between server and client here, so the
   // interactive menu only renders after mount (same look before that).
   const [mounted, setMounted] = useState(false);
@@ -34,7 +41,7 @@ function ProductMenu({ active }: { active: boolean }) {
   if (!mounted) {
     return (
       <button type="button" className={triggerClass}>
-        Producto
+        {header.product}
         <ChevronDown className="h-4 w-4" />
       </button>
     );
@@ -43,7 +50,7 @@ function ProductMenu({ active }: { active: boolean }) {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className={triggerClass}>
-        Producto
+        {header.product}
         <ChevronDown className="h-4 w-4 transition-transform [[data-state=open]>&]:rotate-180" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" sideOffset={12} className="w-80 p-2">
@@ -61,12 +68,13 @@ function ProductMenu({ active }: { active: boolean }) {
 }
 
 function DemoButton({ className = '' }: { className?: string }) {
+  const { header } = useDict();
   return (
     <Link
       href="/contact"
       className={`inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-600 px-4 text-sm font-semibold text-white shadow-md shadow-emerald-900/15 ring-1 ring-inset ring-white/15 transition-colors outline-none hover:from-emerald-600 hover:to-emerald-700 focus-visible:ring-4 focus-visible:ring-emerald-200 ${className}`}
     >
-      Agendar demo
+      {header.bookDemo}
     </Link>
   );
 }
@@ -74,6 +82,8 @@ function DemoButton({ className = '' }: { className?: string }) {
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathname = usePathname();
+  const navLinks = useNavLinks();
+  const { header } = useDict();
 
   // Close the mobile menu whenever the route changes.
   useEffect(() => setIsNavOpen(false), [pathname]);
@@ -112,6 +122,7 @@ function Header() {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
+          <LanguageToggle />
           <DemoButton />
         </div>
 
@@ -119,7 +130,7 @@ function Header() {
           type="button"
           className="md:hidden -mr-2 p-2 text-gray-700"
           onClick={() => setIsNavOpen((open) => !open)}
-          aria-label={isNavOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={isNavOpen ? header.closeMenu : header.openMenu}
           aria-expanded={isNavOpen}
           aria-controls="mobile-nav"
         >
@@ -164,8 +175,9 @@ function Header() {
               </Link>
             )
           )}
-          <div className="pt-3">
-            <DemoButton className="w-full" />
+          <div className="flex items-center gap-3 pt-3">
+            <LanguageToggle />
+            <DemoButton className="flex-1" />
           </div>
         </nav>
       )}
@@ -174,10 +186,15 @@ function Header() {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   return (
     <section className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex-1">{children}</div>
+      {/* Keyed by route so the enter animation replays on every navigation. */}
+      <div key={pathname} className="page-enter flex-1">
+        {children}
+      </div>
       <Footer />
     </section>
   );

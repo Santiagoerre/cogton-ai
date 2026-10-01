@@ -7,68 +7,39 @@ import {
   SectionHeading
 } from '@/components/marketing';
 import { CatalogueVisual } from '@/components/illustrations/catalogue-visual';
+import { getDict } from '@/lib/i18n/server';
 
-export const metadata: Metadata = {
-  title: 'Cogton Optimizador de Catálogo — El embalaje correcto para cada producto'
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { catalogue } = await getDict();
+  return { title: catalogue.metaTitle };
+}
 
-const levels = [
-  {
-    icon: Tags,
-    label: 'Nivel 1',
-    title: 'SKUs',
-    description:
-      'Cada producto recibe su tipo de embalaje óptimo según sus dimensiones, peso, fragilidad y valor.',
-    points: [
-      'Bolsa de papel, bolsa mailer, sobre acolchado o caja',
-      'Detecta productos que hoy van en caja pero podrían viajar seguros en un formato más liviano y barato'
-    ]
-  },
-  {
-    icon: Boxes,
-    label: 'Nivel 2',
-    title: 'Cajas',
-    description:
-      'Analizamos tu historial de pedidos para encontrar el set ideal de tamaños de caja a tener en stock.',
-    points: [
-      'Cuántos tamaños necesitás y cuáles',
-      'Cuánto ahorra cada cambio en material, flete y espacio vacío'
-    ]
-  }
-];
+const levelIcons = [Tags, Boxes];
 
-const deliverables = [
-  'Catálogo de embalaje recomendado',
-  'Asignación de embalaje por SKU',
-  'Caso de ahorro cuantificado',
-  'Base para el cumplimiento de espacio vacío de la PPWR'
-];
+export default async function CatalogueOptimiserPage() {
+  const { catalogue: t, common, products } = await getDict();
 
-const results = [
-  'Menos tamaños de caja para comprar y almacenar',
-  'Embalaje más barato por envío',
-  'Menos relleno',
-  'Un catálogo basado en pedidos reales, no en costumbre'
-];
-
-export default function CatalogueOptimiserPage() {
   return (
     <main className="bg-white">
       <ProductHero
-        product="Cogton Optimizador de Catálogo"
-        title="El catálogo de embalaje correcto, y el embalaje correcto para cada producto."
-        intro="El Optimizador de Catálogo rediseña el embalaje de tu empresa desde cero, en dos niveles: qué embalaje usa cada producto y qué tamaños de caja conviene tener en stock."
+        product={products[1].name}
+        title={t.title}
+        intro={t.intro}
         visual={<CatalogueVisual />}
+        demoLabel={common.demoRequest}
+        pricingLabel={common.seePricing}
       />
 
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Dos niveles"
-            title="Del producto al catálogo completo"
+            eyebrow={t.levelsEyebrow}
+            title={t.levelsTitle}
           />
           <div className="grid gap-6 md:grid-cols-2">
-            {levels.map(({ icon: Icon, label, title, description, points }) => (
+            {t.levels.map(({ label, title, description, points }, i) => {
+              const Icon = levelIcons[i];
+              return (
               <div key={title} className="rounded-2xl border border-gray-200 p-6 sm:p-10">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
@@ -89,7 +60,8 @@ export default function CatalogueOptimiserPage() {
                   ))}
                 </ul>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -98,18 +70,17 @@ export default function CatalogueOptimiserPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-              Entregable
+              {t.deliverableEyebrow}
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Qué recibís
+              {t.deliverableTitle}
             </h2>
             <p className="mt-4 text-lg text-gray-500">
-              Un catálogo de embalaje listo para implementar, con el ahorro
-              calculado sobre tus propios pedidos.
+              {t.deliverableBody}
             </p>
           </div>
           <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
-            {deliverables.map((item) => (
+            {t.deliverables.map((item) => (
               <li
                 key={item}
                 className="flex gap-3 rounded-xl border border-gray-200 bg-white p-5 font-medium text-gray-900"
@@ -122,13 +93,17 @@ export default function CatalogueOptimiserPage() {
         </div>
       </section>
 
-      <ResultsSection title="Un catálogo que ahorra en cada envío" results={results} />
+      <ResultsSection
+        eyebrow={common.results}
+        title={t.resultsTitle}
+        results={t.results}
+      />
 
       <CtaBanner
-        title="Rediseñemos tu catálogo"
-        subtitle="Analizamos tus pedidos y te mostramos cuánto podés ahorrar."
+        title={t.ctaTitle}
+        subtitle={t.ctaSubtitle}
         href="/pricing#cotizar"
-        label="Solicitar análisis"
+        label={t.ctaLabel}
       />
     </main>
   );

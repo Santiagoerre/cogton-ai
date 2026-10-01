@@ -1,104 +1,29 @@
 import { Check, Plus } from 'lucide-react';
 import { CtaBanner, SectionHeading } from '@/components/marketing';
 import { SavingsCalculator } from './savings-calculator';
-import { QuoteForm } from './quote-form';
+import { QuoteForm } from '@/components/quote-form';
+import { getDict } from '@/lib/i18n/server';
 
-const pricingFactors = [
-  {
-    title: 'Volumen.',
-    description:
-      'Cuántos envíos pasan por Cogton AI. Más volumen, menor costo por envío.'
-  },
-  {
-    title: 'Almacenes.',
-    description: 'En cuántos sitios usás Cogton AI.'
-  },
-  {
-    title: 'Catálogo de embalaje.',
-    description: 'Qué cajas, bolsas mailer y sobres acolchados usás hoy.'
-  },
-  {
-    title: 'Integración.',
-    description:
-      'Cómo nos conectamos a tus sistemas: API, tu WMS / ERP o carga de archivos.'
-  }
-];
+export default async function PricingPage() {
+  const { pricing: t } = await getDict();
 
-const steps = [
-  {
-    title: 'Llamada',
-    description:
-      'Demo de Cogton AI con tus productos y repaso de los datos que necesitamos para simular tu caso de negocio.'
-  },
-  {
-    title: 'Caso de negocio',
-    description:
-      'Simulamos el ahorro sobre tus pedidos reales y volvemos con los números y el precio.'
-  },
-  {
-    title: 'Piloto',
-    description:
-      'Medimos el ahorro en tu almacén, contra tu operación actual, antes de extenderlo al resto.'
-  }
-];
-
-const faqs = [
-  {
-    question: '¿Mi WMS no hace esto ya?',
-    answer:
-      'La mayoría de los WMS asignan el embalaje con reglas fijas o lo dejan a criterio del operario. Cogton AI analiza los atributos de cada producto — fragilidad, flexibilidad, peso y dimensiones — y elige el tipo y tamaño de embalaje correcto para cada pedido.'
-  },
-  {
-    question: '¿Qué cambia en mi WMS y en el almacén?',
-    answer:
-      'Tu WMS sigue igual: solo recibe la recomendación de embalaje de cada pedido. En el almacén, el equipo de empaque sabe qué caja, bolsa mailer o sobre usar, sin tener que adivinar.'
-  },
-  {
-    question: '¿Cuáles son las opciones de integración?',
-    answer:
-      'Nos conectamos por API, directamente con tu WMS / ERP o mediante carga de archivos. Lo definimos juntos en la primera llamada según tus sistemas.'
-  },
-  {
-    question: '¿Qué datos necesitan para empezar?',
-    answer:
-      'Tu catálogo de productos (dimensiones y peso), los embalajes que usás hoy y un historial de pedidos. Con eso armamos la simulación.'
-  },
-  {
-    question: '¿Cómo se calcula el ahorro?',
-    answer:
-      'Comparamos el embalaje que usás hoy con el que recomienda Cogton AI para los mismos pedidos: material, volumen cúbico y costo de flete.'
-  },
-  {
-    question: '¿Puedo probarlo antes de contratar?',
-    answer:
-      'Sí. Arrancamos con un caso de negocio sobre tus datos y un piloto en tu almacén, para que veas el ahorro antes de extenderlo.'
-  }
-];
-
-const highlights = [
-  'Sin reemplazar tu WMS',
-  'Caso de negocio con tus datos',
-  'Piloto antes de escalar'
-];
-
-export default function PricingPage() {
   return (
     <main className="bg-white">
       <section className="bg-gradient-to-b from-emerald-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-14 sm:pt-24 sm:pb-16">
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-            Precios
+            {t.eyebrow}
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            ROI desde el primer envío
+            {t.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl">
-            Pagás centavos por cada pedido y ahorrás hasta un 18% en flete.
-            Desde <span className="whitespace-nowrap">$80 / mes</span> para
-            optimizar tu embalaje con IA.
+            {t.introBefore}{' '}
+            <span className="whitespace-nowrap">{t.introPrice}</span>{' '}
+            {t.introAfter}
           </p>
           <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-            {highlights.map((item) => (
+            {t.highlights.map((item) => (
               <li key={item} className="flex items-center gap-2 text-sm font-medium text-gray-700">
                 <Check className="h-4 w-4 text-emerald-600" />
                 {item}
@@ -115,11 +40,11 @@ export default function PricingPage() {
           </div>
           <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-6 sm:p-10 lg:col-span-5 lg:sticky lg:top-24">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Cómo se define tu precio
+              {t.factorsTitle}
             </h2>
-            <p className="mt-3 text-gray-300">Cuatro cosas definen tu precio.</p>
+            <p className="mt-3 text-gray-300">{t.factorsIntro}</p>
             <ul className="mt-8 space-y-6">
-              {pricingFactors.map(({ title, description }) => (
+              {t.factors.map(({ title, description }) => (
                 <li key={title} className="flex gap-4">
                   <Check className="mt-1 h-5 w-5 flex-shrink-0 text-emerald-400" />
                   <p className="text-gray-100 leading-relaxed">
@@ -136,8 +61,8 @@ export default function PricingPage() {
       <section className="bg-gray-50 py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            title="¿Cuánto podrías ahorrar?"
-            subtitle="Mové el volumen y cargá tu costo de flete promedio."
+            title={t.calcTitle}
+            subtitle={t.calcSubtitle}
           />
           <SavingsCalculator />
         </div>
@@ -146,12 +71,12 @@ export default function PricingPage() {
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Proceso"
-            title="Cómo empezamos"
-            subtitle="De la primera llamada al piloto en tu almacén, en tres pasos."
+            eyebrow={t.processEyebrow}
+            title={t.processTitle}
+            subtitle={t.processSubtitle}
           />
           <ol className="grid gap-6 md:grid-cols-3">
-            {steps.map(({ title, description }, i) => (
+            {t.steps.map(({ title, description }, i) => (
               <li
                 key={title}
                 className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8"
@@ -176,11 +101,11 @@ export default function PricingPage() {
           <div className="lg:col-span-4">
             <p className="text-sm font-semibold text-emerald-600">FAQ</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:mt-4 sm:text-5xl">
-              ¿Preguntas?
+              {t.faqTitle}
             </h2>
           </div>
           <div className="divide-y divide-gray-200 border-b border-gray-200 lg:col-span-8">
-            {faqs.map(({ question, answer }) => (
+            {t.faqs.map(({ question, answer }) => (
               <details key={question} className="group py-5 first:pt-0 sm:py-7">
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-semibold sm:gap-6 text-gray-900 sm:text-xl [&::-webkit-details-marker]:hidden">
                   {question}
@@ -196,10 +121,10 @@ export default function PricingPage() {
       </section>
 
       <CtaBanner
-        title="Calculemos tu ahorro real"
-        subtitle="Armamos el caso de negocio con tus pedidos."
+        title={t.ctaTitle}
+        subtitle={t.ctaSubtitle}
         href="#cotizar"
-        label="Agendar una llamada"
+        label={t.ctaLabel}
       />
     </main>
   );

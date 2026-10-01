@@ -1,3 +1,5 @@
+import { getDict } from '@/lib/i18n/server';
+
 // Isometric mock of a packed order: box wireframe with items placed inside.
 
 const S = 14;
@@ -39,19 +41,20 @@ const items: { at: Vec; size: Vec; colors: [string, string, string] }[] = [
   { at: [6, 4, 0], size: [4, 4, 2], colors: ['#a7f3d0', '#10b981', '#34d399'] }
 ];
 
-export function CartonizationVisual({ compact = false }: { compact?: boolean }) {
+export async function CartonizationVisual({ compact = false }: { compact?: boolean }) {
+  const { visuals: t } = await getDict();
   const [W, D, H] = BOX;
   return (
     <div className="rounded-2xl bg-white p-6 shadow-xl shadow-gray-200/60 ring-1 ring-gray-200">
       <div className="flex items-center justify-between text-sm">
-        <span className="font-semibold text-gray-900">Pedido #10482</span>
-        <span className="text-gray-500">4 ítems</span>
+        <span className="font-semibold text-gray-900">{t.order}</span>
+        <span className="text-gray-500">{t.items}</span>
       </div>
       <svg
         viewBox="-115 -100 250 240"
         className={`mx-auto my-4 w-full ${compact ? 'max-w-64' : 'max-w-sm'}`}
         role="img"
-        aria-label="Vista 3D de cuatro productos acomodados dentro de una caja"
+        aria-label={t.cartonAlt}
       >
         {/* back edges of the box */}
         <g stroke="#9ca3af" strokeWidth="1.2" strokeDasharray="4 4" fill="none">
@@ -70,13 +73,13 @@ export function CartonizationVisual({ compact = false }: { compact?: boolean }) 
       </svg>
       <div className="flex flex-wrap gap-2 text-xs font-medium">
         <span className="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700 ring-1 ring-emerald-200">
-          Caja M · 30 × 24 × 18 cm
+          {t.boxChip}
         </span>
         <span className="rounded-full bg-gray-50 px-3 py-1 text-gray-700 ring-1 ring-gray-200">
-          86% de llenado
+          {t.fillChip}
         </span>
         <span className="rounded-full bg-amber-50 px-3 py-1 text-amber-700 ring-1 ring-amber-200">
-          Este lado arriba
+          {t.thisSideUp}
         </span>
       </div>
     </div>

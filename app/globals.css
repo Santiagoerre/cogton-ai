@@ -99,9 +99,31 @@
   animation-play-state: paused;
 }
 
+/* Page transition: each route fades and rises into place. */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* In-page anchors (e.g. #cotizar) glide instead of jumping. */
+html {
+  scroll-behavior: smooth;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .marquee-track,
+  .page-enter {
     animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
 
@@ -296,4 +318,27 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Packaging flow illustration (components/illustrations/packaging-flow.tsx) */
+.pf-flow { stroke-dasharray: 4 5; animation: pf-flow 1.2s linear infinite; }
+.pf-pulse { animation: pf-pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pf-flow { to { stroke-dashoffset: -18; } }
+@keyframes pf-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
+/* Story on an 8s loop: attributes light up, then the mailer gets picked. */
+.pf-attr, .pf-pick, .pf-check { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+.pf-attr { animation-name: pf-attr; }
+.pf-pick { animation-name: pf-pick; }
+.pf-check { animation-name: pf-check; transform-box: fill-box; transform-origin: center; }
+@keyframes pf-attr { 0% { opacity: 0; } 5%, 80% { opacity: 1; } 88%, 100% { opacity: 0; } }
+@keyframes pf-pick { 0%, 30% { opacity: 0; } 36%, 84% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes pf-check {
+  0%, 34% { opacity: 0; transform: scale(0.4); }
+  40% { opacity: 1; transform: scale(1.15); }
+  44%, 84% { opacity: 1; transform: scale(1); }
+  92%, 100% { opacity: 0; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-flow, .pf-pulse { animation: none; }
+  .pf-attr, .pf-pick, .pf-check { animation: none; opacity: 1; transform: none; }
 }

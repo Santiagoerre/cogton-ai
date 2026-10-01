@@ -1,4 +1,5 @@
 import { CtaLink } from '@/components/marketing';
+import { getDict } from '@/lib/i18n/server';
 import {
   PackageSearch,
   LineChart,
@@ -8,56 +9,21 @@ import {
   Leaf
 } from 'lucide-react';
 
-const features = [
-  {
-    icon: Ruler,
-    title: 'Análisis de atributos del producto',
-    description:
-      'Cogton AI no se queda en las dimensiones: con IA identifica fragilidad, flexibilidad y peso de cada SKU (por cámara, escáner o integración con tu catálogo) para entender qué tipo de embalaje necesita.'
-  },
-  {
-    icon: PackageSearch,
-    title: 'Motor de recomendación por tipo de embalaje',
-    description:
-      'El algoritmo empareja cada producto con el tipo correcto — caja, bolsa mailer o sobre acolchado — según sus atributos, no solo su tamaño, en segundos y para cada pedido.'
-  },
-  {
-    icon: Boxes,
-    title: 'Catálogo de embalajes configurable',
-    description:
-      'Cargá tu propio catálogo de cajas, sobres y materiales de relleno, con costos y disponibilidad por almacén, y dejá que el sistema elija entre tus opciones reales.'
-  },
-  {
-    icon: Truck,
-    title: 'Optimización de costo de flete',
-    description:
-      'Al reducir el volumen cúbico de cada envío, tus tarifas de flete dimensional bajan automáticamente — sin renegociar con tu transportista.'
-  },
-  {
-    icon: LineChart,
-    title: 'Reportes y analítica de ahorro',
-    description:
-      'Dashboards en tiempo real que muestran ahorro en material, volumen y flete por cliente, almacén o período, para justificar el ROI ante tu equipo.'
-  },
-  {
-    icon: Leaf,
-    title: 'Reducción de huella de embalaje',
-    description:
-      'Menos cartón, menos relleno y menos viajes de reposición: métricas de sostenibilidad listas para reportarle a tus clientes finales.'
-  }
-];
+const featureIcons = [Ruler, PackageSearch, Boxes, Truck, LineChart, Leaf];
 
-export default function FeaturesPage() {
+export default async function FeaturesPage() {
+  const { features: t, common } = await getDict();
+  const features = t.items.map((item, i) => ({ ...item, icon: featureIcons[i] }));
+
   return (
     <main>
       <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl">
-            Todo lo que necesitás para optimizar tu embalaje
+            {t.title}
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
-            Desde la medición del producto hasta el reporte de ahorro final,
-            Cogton AI cubre todo el proceso de decisión de embalaje.
+            {t.subtitle}
           </p>
         </div>
       </section>
@@ -90,15 +56,14 @@ export default function FeaturesPage() {
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                ¿Querés ver Cogton AI con tus propios datos?
+                {t.ctaTitle}
               </h2>
               <p className="mt-3 max-w-3xl text-lg text-gray-500">
-                Agendá una demo de 20 minutos y te mostramos el ahorro
-                proyectado con tu volumen de envíos actual.
+                {t.ctaBody}
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">
-              <CtaLink href="/contact">Solicitar demo</CtaLink>
+              <CtaLink href="/contact">{common.demoRequest}</CtaLink>
             </div>
           </div>
         </div>

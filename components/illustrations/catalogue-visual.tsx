@@ -1,26 +1,23 @@
+import { getDict } from '@/lib/i18n/server';
+
 // Mock of the per-SKU packaging assignment the Catalogue Optimiser delivers.
 
-const rows = [
-  { sku: 'Remera de algodón', today: 'Caja S', recommended: 'Bolsa mailer', changed: true },
-  { sku: 'Taza de cerámica', today: 'Caja S', recommended: 'Caja S', changed: false },
-  { sku: 'Libro tapa blanda', today: 'Caja M', recommended: 'Sobre acolchado', changed: true },
-  { sku: 'Pack de medias', today: 'Caja S', recommended: 'Bolsa de papel', changed: true },
-  { sku: 'Lámpara de mesa', today: 'Caja XL', recommended: 'Caja L', changed: true }
-];
+export async function CatalogueVisual() {
+  const { visuals: t } = await getDict();
+  const rows = t.rows;
 
-export function CatalogueVisual() {
   return (
     <div className="rounded-2xl bg-white p-6 shadow-xl shadow-gray-200/60 ring-1 ring-gray-200">
       <div className="flex items-center justify-between text-sm">
-        <span className="font-semibold text-gray-900">Catálogo recomendado</span>
-        <span className="text-gray-500">Asignación por SKU</span>
+        <span className="font-semibold text-gray-900">{t.catalogueTitle}</span>
+        <span className="text-gray-500">{t.catalogueSub}</span>
       </div>
       <table className="mt-5 w-full text-left text-sm">
         <thead>
           <tr className="text-xs uppercase tracking-wider text-gray-400">
-            <th className="pb-3 font-medium">Producto</th>
-            <th className="pb-3 font-medium">Hoy</th>
-            <th className="pb-3 font-medium">Recomendado</th>
+            <th className="pb-3 font-medium">{t.colProduct}</th>
+            <th className="pb-3 font-medium">{t.colToday}</th>
+            <th className="pb-3 font-medium">{t.colRecommended}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">

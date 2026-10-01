@@ -110,9 +110,11 @@ export function CtaBanner({
 }
 
 export function ResultsSection({
+  eyebrow,
   title,
   results
 }: {
+  eyebrow: string;
   title: string;
   results: string[];
 }) {
@@ -121,7 +123,7 @@ export function ResultsSection({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-5">
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
-            Resultados
+            {eyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {title}
@@ -147,12 +149,16 @@ export function ProductHero({
   product,
   title,
   intro,
-  visual
+  visual,
+  demoLabel,
+  pricingLabel
 }: {
   product: string;
   title: string;
   intro: string;
   visual: React.ReactNode;
+  demoLabel: string;
+  pricingLabel: string;
 }) {
   return (
     <section className="bg-gradient-to-b from-emerald-50 to-white">
@@ -168,12 +174,12 @@ export function ProductHero({
             {intro}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CtaLink href="/pricing#cotizar">Solicitar demo</CtaLink>
+            <CtaLink href="/pricing#cotizar">{demoLabel}</CtaLink>
             <Link
               href="/pricing"
               className="inline-flex h-14 w-full items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 text-lg font-semibold text-gray-900 transition-colors outline-none hover:border-gray-400 hover:bg-gray-50 focus-visible:ring-4 focus-visible:ring-emerald-100 sm:w-auto"
             >
-              Ver precios
+              {pricingLabel}
             </Link>
           </div>
         </div>

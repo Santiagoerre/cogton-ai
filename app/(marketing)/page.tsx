@@ -16,96 +16,45 @@ import {
 } from '@/components/illustrations/step-icons';
 import { CtaBanner, CtaLink, SectionHeading } from '@/components/marketing';
 import { Marquee } from '@/components/marquee';
+import { getDict } from '@/lib/i18n/server';
+import { localizeProducts } from '@/lib/products';
 
+// Official logos, saved in /public/logos. `h` sets the display height so
+// wide wordmarks and square tiles read at a similar visual weight.
 const wmsPlatforms = [
-  'SAP EWM',
-  'Oracle WMS Cloud',
-  'Manhattan Active WM',
-  'Blue Yonder',
-  'Infor WMS',
-  'Körber',
-  'Microsoft Dynamics 365',
-  'NetSuite WMS',
-  'Odoo',
-  'Deposco',
-  'ShipHero',
-  'Logiwa'
+  { name: 'SAP', logo: 'sap.svg', h: 'h-9' },
+  { name: 'Oracle', logo: 'oracle.svg', h: 'h-5' },
+  { name: 'Manhattan Associates', logo: 'manhattan.svg', h: 'h-5' },
+  { name: 'Blue Yonder', logo: 'blueyonder.png', h: 'h-6' },
+  { name: 'Infor', logo: 'infor.png', h: 'h-10' },
+  { name: 'Körber', logo: 'korber.svg', h: 'h-10' },
+  { name: 'Microsoft Dynamics 365', logo: 'd365.svg', h: 'h-8', label: 'Dynamics 365' },
+  { name: 'NetSuite', logo: 'netsuite.svg', h: 'h-10' },
+  { name: 'Odoo', logo: 'odoo.png', h: 'h-8' },
+  { name: 'Deposco', logo: 'deposco.png', h: 'h-7' },
+  { name: 'ShipHero', logo: 'shiphero.svg', h: 'h-9' },
+  { name: 'Logiwa', logo: 'logiwa.png', h: 'h-8' }
 ];
 
-const productCards = [
-  {
-    href: '/productos/cartonizacion',
-    label: 'En cada pedido',
-    name: 'Cogton Cartonización',
-    tagline: 'La caja correcta para cada pedido.',
-    description:
-      'Calcula en tiempo real la mejor configuración de empaque y recomienda la caja o el sobre que envía menos aire al menor costo.',
-    points: [
-      'Vista 3D para el empacador',
-      'Respeta frágil, este lado arriba y límites de apilado',
-      'Costo de envío conocido antes de despachar'
-    ],
-    visual: <CartonizationVisual compact />
-  },
-  {
-    href: '/productos/catalogo',
-    label: 'En tu catálogo',
-    name: 'Cogton Optimizador de Catálogo',
-    tagline: 'El embalaje correcto para cada producto.',
-    description:
-      'Rediseña tu embalaje desde cero: asigna el formato óptimo a cada SKU y define el set ideal de tamaños de caja.',
-    points: [
-      'Bolsa de papel, mailer, sobre acolchado o caja por SKU',
-      'Menos tamaños de caja para comprar y almacenar',
-      'Base para el cumplimiento de espacio vacío de la PPWR'
-    ],
-    visual: <CatalogueVisual />
-  }
+const productMeta = [
+  { href: '/productos/cartonizacion', visual: <CartonizationVisual compact /> },
+  { href: '/productos/catalogo', visual: <CatalogueVisual /> }
 ];
 
-const steps = [
-  {
-    icon: <MeasureIcon />,
-    title: '1. Rediseñamos tu catálogo',
-    description:
-      'El Optimizador de Catálogo asigna el embalaje correcto a cada SKU y define qué tamaños de caja tener en stock.'
-  },
-  {
-    icon: <OptimizeIcon />,
-    title: '2. Elegimos la caja de cada pedido',
-    description:
-      'Cartonización calcula en tiempo real la mejor opción de ese catálogo para cada pedido.'
-  },
-  {
-    icon: <SaveIcon />,
-    title: '3. Ahorrás en cada envío',
-    description:
-      'Menos aire, menos material y menor costo de flete y peso dimensional.'
-  }
-];
+const stepIcons = [<MeasureIcon key="m" />, <OptimizeIcon key="o" />, <SaveIcon key="s" />];
+const reasonIcons = [ShoppingCart, FileSpreadsheet, Leaf];
 
-const reasons = [
-  {
-    icon: ShoppingCart,
-    title: 'Basado en tus pedidos reales',
-    description:
-      'Trabajamos con tu historial de pedidos y tu catálogo de productos, no con supuestos ni costumbre.'
-  },
-  {
-    icon: FileSpreadsheet,
-    title: 'Con o sin integración',
-    description:
-      'Se conecta a cualquier WMS o ERP por API, o funciona con archivos CSV desde el primer día.'
-  },
-  {
-    icon: Leaf,
-    title: 'Listo para la PPWR',
-    description:
-      'Menos espacio vacío y menos material, con la base para cumplir la normativa europea de embalajes.'
-  }
-];
+export default async function HomePage() {
+  const { home: t, common, products: productTexts } = await getDict();
+  const products = localizeProducts(productTexts);
+  const productCards = productMeta.map((meta, i) => ({
+    ...meta,
+    ...products[i],
+    ...t.productCards[i]
+  }));
+  const steps = t.steps.map((step, i) => ({ ...step, icon: stepIcons[i] }));
+  const reasons = t.reasons.map((reason, i) => ({ ...reason, icon: reasonIcons[i] }));
 
-export default function HomePage() {
   return (
     <main className="bg-white">
       <section className="relative isolate overflow-hidden py-14 sm:py-20 lg:py-24">
@@ -122,15 +71,14 @@ export default function HomePage() {
           <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-12">
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
               <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl md:text-6xl lg:text-[2.75rem] lg:leading-[1.08] xl:text-[3.25rem]">
-                El embalaje correcto,
-                <span className="block text-emerald-600">automáticamente</span>
+                {t.heroTitle}
+                <span className="block text-emerald-600">{t.heroHighlight}</span>
               </h1>
               <p className="mt-4 text-lg text-gray-500 sm:mt-6 sm:text-xl lg:max-w-lg">
-                La caja justa para cada pedido y el embalaje ideal para cada
-                producto. Menos cartón, relleno y flete, conectado a tu WMS.
+                {t.heroBody}
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0 flex flex-col sm:flex-row gap-3 sm:justify-center lg:justify-start">
-                <CtaLink href="/pricing#cotizar">Solicitar demo</CtaLink>
+                <CtaLink href="/pricing#cotizar">{common.demoRequest}</CtaLink>
               </div>
             </div>
             <div className="-mx-2 mt-10 sm:mx-0 sm:mt-12 lg:mt-0 lg:col-span-6 lg:ml-auto lg:w-full lg:max-w-[600px]">
@@ -140,14 +88,14 @@ export default function HomePage() {
                   <span className="h-2.5 w-2.5 rounded-full bg-gray-200" />
                   <span className="h-2.5 w-2.5 rounded-full bg-gray-200" />
                   <span className="ml-3 truncate text-xs font-medium text-gray-500">
-                    Cogton AI · Recomendación de embalaje
+                    {t.windowTitle}
                   </span>
                   <span className="ml-auto flex items-center gap-1.5 text-xs font-medium text-emerald-700">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60 motion-reduce:animate-none" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                     </span>
-                    En vivo
+                    {t.live}
                   </span>
                 </div>
                 <div className="p-1.5 sm:p-4">
@@ -161,15 +109,27 @@ export default function HomePage() {
 
       <section className="py-6 sm:py-10 bg-white border-y border-gray-100">
         <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-gray-400 sm:mb-6">
-          Se integra con
+          {t.integratesWith}
         </p>
         <Marquee duration={60}>
-          {wmsPlatforms.map((name) => (
+          {wmsPlatforms.map(({ name, logo, h, label }) => (
             <span
               key={name}
-              className="mx-5 text-base font-semibold text-gray-400 sm:mx-8 sm:text-lg whitespace-nowrap"
+              className="mx-6 flex items-center gap-2 opacity-70 grayscale sm:mx-10"
             >
-              {name}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/logos/${logo}`}
+                alt={label ? '' : name}
+                height={40}
+                loading="lazy"
+                className={`${h} w-auto max-w-none`}
+              />
+              {label && (
+                <span className="text-base font-semibold text-gray-700 whitespace-nowrap">
+                  {label}
+                </span>
+              )}
             </span>
           ))}
         </Marquee>
@@ -178,9 +138,9 @@ export default function HomePage() {
       <section id="productos" className="bg-gray-50 py-14 sm:py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Productos"
-            title="Dos formas de optimizar tu embalaje"
-            subtitle="Usalos por separado o juntos: uno decide en cada pedido, el otro rediseña tu catálogo."
+            eyebrow={t.productsEyebrow}
+            title={t.productsTitle}
+            subtitle={t.productsSubtitle}
           />
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
             {productCards.map((product) => (
@@ -214,7 +174,7 @@ export default function HomePage() {
                     ))}
                   </ul>
                   <span className="mt-8 inline-flex items-center font-semibold text-emerald-700">
-                    Conocer más
+                    {common.learnMore}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
@@ -227,9 +187,9 @@ export default function HomePage() {
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Cómo funciona"
-            title="Mejor juntos"
-            subtitle="El catálogo correcto, y la caja correcta de ese catálogo en cada pedido."
+            eyebrow={t.howEyebrow}
+            title={t.howTitle}
+            subtitle={t.howSubtitle}
           />
           <div className="grid gap-8 sm:gap-10 sm:grid-cols-3 relative">
             <div
@@ -254,8 +214,8 @@ export default function HomePage() {
       <section className="bg-gray-50 py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Por qué Cogton"
-            title="Diseñado para operadores 3PL y e-commerce"
+            eyebrow={t.whyEyebrow}
+            title={t.whyTitle}
           />
           <div className="grid gap-6 md:grid-cols-3">
             {reasons.map(({ icon: Icon, title, description }) => (
@@ -272,10 +232,10 @@ export default function HomePage() {
       </section>
 
       <CtaBanner
-        title="¿Listo para optimizar tu embalaje?"
-        subtitle="Te mostramos cuánto podrías ahorrar con tus pedidos reales."
+        title={t.ctaTitle}
+        subtitle={t.ctaSubtitle}
         href="/pricing#cotizar"
-        label="Solicitar demo"
+        label={common.demoRequest}
       />
     </main>
   );

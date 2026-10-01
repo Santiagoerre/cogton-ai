@@ -1,12 +1,9 @@
-export const products = [
-  {
-    href: '/productos/cartonizacion',
-    name: 'Cogton Cartonización',
-    tagline: 'La caja correcta para cada pedido.'
-  },
-  {
-    href: '/productos/catalogo',
-    name: 'Cogton Optimizador de Catálogo',
-    tagline: 'El embalaje correcto para cada producto.'
-  }
+export const productHrefs = [
+  '/productos/cartonizacion',
+  '/productos/catalogo'
 ];
+
+/** Localized product list: hrefs are fixed, names/taglines come from the dictionary. */
+export const localizeProducts = (
+  items: { name: string; tagline: string }[]
+) => productHrefs.map((href, i) => ({ href, ...items[i] }));
