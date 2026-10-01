@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
+import Script from 'next/script';
 import { I18nProvider } from '@/lib/i18n/client';
 import { getDict, getLocale, needsWelcome } from '@/lib/i18n/server';
 import { WelcomeDialog } from '@/components/welcome-dialog';
@@ -15,6 +16,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   themeColor: '#ffffff'
 };
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -38,6 +41,17 @@ export default async function RootLayout({
           {children}
           <WelcomeDialog initiallyOpen={showWelcome} />
         </I18nProvider>
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
