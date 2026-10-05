@@ -8,7 +8,19 @@ import { WelcomeDialog } from '@/components/welcome-dialog';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { meta } = await getDict();
-  return { title: meta.title, description: meta.description };
+  return {
+    metadataBase: new URL('https://ai.cogton.com'),
+    title: meta.title,
+    description: meta.description,
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: '/',
+      siteName: 'Cogton AI',
+      type: 'website'
+    },
+    twitter: { card: 'summary_large_image' }
+  };
 }
 
 export const viewport: Viewport = {
