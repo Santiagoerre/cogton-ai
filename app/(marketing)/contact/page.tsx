@@ -1,6 +1,6 @@
 import { Mail, Linkedin, Calendar } from 'lucide-react';
 import { QuoteForm } from '@/components/quote-form';
-import { CONTACT_EMAIL, DEMO_BOOKING_URL } from '@/lib/contact';
+import { CONTACT_EMAIL, DEMO_BOOKING_URL, LINKEDIN_COMPANY_URL } from '@/lib/contact';
 import { getDict } from '@/lib/i18n/server';
 
 export default async function ContactPage() {
@@ -40,7 +40,7 @@ export default async function ContactPage() {
           </a>
 
           <a
-            href="https://www.linkedin.com/company/cogton/"
+            href={LINKEDIN_COMPANY_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-gray-200 p-6 text-center hover:border-emerald-600 transition-colors"

@@ -165,7 +165,12 @@ export const es = {
     submit: 'Enviar solicitud',
     successTitle: '¡Listo! Recibimos tu solicitud',
     successBody:
-      'Te escribiremos pronto al correo que nos dejaste para coordinar la llamada.'
+      'Te escribiremos pronto al correo que nos dejaste para coordinar la llamada.',
+    meanwhile: 'Mientras tanto, síguenos en LinkedIn o habla con nuestro fundador.',
+    followTitle: 'Sigue a Cogton',
+    followBody: 'Novedades e ideas sobre packaging en LinkedIn',
+    founderTitle: 'Habla con nuestro fundador',
+    founderBody: 'Escríbele a Santiago por LinkedIn'
   },
   pricing: {
     eyebrow: 'Precios',

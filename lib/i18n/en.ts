@@ -161,7 +161,12 @@ export const en: Dict = {
     submit: 'Send request',
     successTitle: 'Done! We received your request',
     successBody:
-      'We will email you soon at the address you left to schedule the call.'
+      'We will email you soon at the address you left to schedule the call.',
+    meanwhile: 'In the meantime, follow us on LinkedIn or chat with our founder.',
+    followTitle: 'Follow Cogton',
+    followBody: 'Updates and packaging insights on LinkedIn',
+    founderTitle: 'Chat with our founder',
+    founderBody: 'Message Santiago on LinkedIn'
   },
   pricing: {
     eyebrow: 'Pricing',

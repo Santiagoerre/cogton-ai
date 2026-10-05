@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Linkedin, MessageCircle } from 'lucide-react';
 import { CtaArrow, ctaClassName } from '@/components/marketing';
-import { CONTACT_EMAIL } from '@/lib/contact';
+import { CONTACT_EMAIL, LINKEDIN_COMPANY_URL, LINKEDIN_FOUNDER_URL } from '@/lib/contact';
 import { useDict } from '@/lib/i18n/client';
 import { es } from '@/lib/i18n/es';
 
@@ -50,6 +50,30 @@ export function QuoteForm({ title }: { title?: string }) {
           {t.successTitle}
         </h2>
         <p className="mt-3 text-gray-600">{t.successBody}</p>
+
+        <p className="mt-8 font-medium text-gray-900">{t.meanwhile}</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <a
+            href={LINKEDIN_COMPANY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl border border-gray-200 p-6 text-center transition-colors hover:border-emerald-600"
+          >
+            <Linkedin className="mx-auto h-6 w-6 text-emerald-600" />
+            <h3 className="mt-4 font-medium text-gray-900">{t.followTitle}</h3>
+            <p className="mt-1 text-sm text-gray-500">{t.followBody}</p>
+          </a>
+          <a
+            href={LINKEDIN_FOUNDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl border border-gray-200 p-6 text-center transition-colors hover:border-emerald-600"
+          >
+            <MessageCircle className="mx-auto h-6 w-6 text-emerald-600" />
+            <h3 className="mt-4 font-medium text-gray-900">{t.founderTitle}</h3>
+            <p className="mt-1 text-sm text-gray-500">{t.founderBody}</p>
+          </a>
+        </div>
       </div>
     );
   }
