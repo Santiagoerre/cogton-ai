@@ -32,7 +32,7 @@ export function LanguageToggle({ className = '' }: { className?: string }) {
           lang={code}
           className={`h-full cursor-pointer rounded-[10px] px-2.5 uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-emerald-300 ${
             code === locale
-              ? 'bg-emerald-600 text-white'
+              ? 'bg-gray-900 text-white'
               : 'text-gray-600 hover:text-gray-900'
           }`}
         >

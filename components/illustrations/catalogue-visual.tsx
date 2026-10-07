@@ -7,7 +7,7 @@ export async function CatalogueVisual() {
   const rows = t.rows;
 
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-xl shadow-gray-200/60 ring-1 ring-gray-200">
+    <div className="rounded-2xl bg-white p-6 shadow-card ring-1 ring-gray-200">
       <div className="flex items-center justify-between text-sm">
         <span className="font-semibold text-gray-900">{t.catalogueTitle}</span>
         <span className="text-gray-500">{t.catalogueSub}</span>

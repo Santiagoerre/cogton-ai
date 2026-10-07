@@ -53,6 +53,7 @@ export const en: Dict = {
     back: 'Back to home'
   },
   home: {
+    heroEyebrow: 'AI packaging optimization · 3PL & e-commerce',
     heroTitle: 'The right packaging,',
     heroHighlight: 'automatically',
     heroBody:

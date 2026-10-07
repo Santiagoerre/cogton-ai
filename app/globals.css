@@ -75,9 +75,210 @@
   }
 }
 
-@layer utilities {
-  body {
-    font-family: "Manrope", Arial, Helvetica, sans-serif;
+/*
+  Cogton look: a shipping manifest on kraft paper. Neutrals are remapped to
+  warm paper/ink tones, so every existing gray-* / white utility picks it up.
+*/
+@theme {
+  --font-sans: var(--font-archivo), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
+
+  /* Paper and ink. gray-500+ pass WCAG AA on both white and gray-50. */
+  --color-white: #fffdf9;
+  --color-gray-50: #f7f3ec;
+  --color-gray-100: #efe9df;
+  --color-gray-200: #e3dccf;
+  --color-gray-300: #d0c6b5;
+  --color-gray-400: #a89d88;
+  --color-gray-500: #6f6552;
+  --color-gray-600: #574e3f;
+  --color-gray-700: #433c31;
+  --color-gray-800: #2e2922;
+  --color-gray-900: #221f19;
+  --color-gray-950: #171511;
+  --color-slate-50: #f7f3ec;
+  --color-ink: #221f19;
+
+  /* Brand green, softened to pine. Used for brand moments, never for buttons. */
+  --color-emerald-50: #eef6f1;
+  --color-emerald-100: #d5ebdd;
+  --color-emerald-200: #b4dcc3;
+  --color-emerald-300: #86c6a0;
+  --color-emerald-400: #57ad7e;
+  --color-emerald-500: #339466;
+  --color-emerald-600: #237a53;
+  --color-emerald-700: #1d6245;
+  --color-emerald-800: #194e39;
+  --color-emerald-900: #153f2f;
+  --color-emerald-950: #0b241a;
+  --color-pine: #15261f;
+
+  /* Ochre for "savings" highlights. */
+  --color-amber-50: #fbf5e7;
+  --color-amber-200: #ebd7a4;
+  --color-amber-700: #8a6420;
+
+  /* Action: reserved for anything that converts (demo, quote, submit).
+     White text on it is ~5:1. Nothing decorative may use this hue. */
+  --color-action: #c2410c;
+  --color-action-hover: #a3360a;
+
+  --radius-2xl: 0.875rem;
+}
+
+@layer base {
+  /* Headlines run extra-wide, like stencilled carton markings. */
+  h1,
+  h2 {
+    font-stretch: 125%;
+    font-variation-settings: "wdth" 125;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  h3 {
+    font-stretch: 112%;
+    font-variation-settings: "wdth" 112;
+  }
+  ::selection {
+    background: var(--color-emerald-200);
+    color: var(--color-ink);
+  }
+}
+
+/* Paper grain over the whole site. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .25 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Dieline grid: faint fold lines that fade toward the bottom. */
+.bg-dieline {
+  background-color: var(--color-white);
+  background-image:
+    radial-gradient(ellipse 90% 70% at 50% 0%, transparent 35%, var(--color-white) 95%),
+    linear-gradient(to right, rgb(34 31 25 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(34 31 25 / 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 36px 36px;
+}
+
+/* Corrugated flutes, light (kraft) and dark (ink) variants. */
+.bg-kraft {
+  background-color: var(--color-gray-50);
+  background-image: repeating-linear-gradient(90deg, rgb(110 90 50 / 0.03) 0 2px, transparent 2px 10px);
+}
+.bg-flutes {
+  background-color: var(--color-pine);
+  background-image:
+    radial-gradient(ellipse 60% 80% at 85% 0%, rgb(87 173 126 / 0.18), transparent 70%),
+    repeating-linear-gradient(90deg, rgb(255 253 249 / 0.025) 0 2px, transparent 2px 10px);
+}
+
+/* Printer's crop marks around a box. */
+.crop-marks {
+  position: relative;
+}
+.crop-marks::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  pointer-events: none;
+  --m: var(--color-gray-400);
+  background:
+    linear-gradient(var(--m), var(--m)) top left / 12px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) top left / 1px 12px no-repeat,
+    linear-gradient(var(--m), var(--m)) top right / 12px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) top right / 1px 12px no-repeat,
+    linear-gradient(var(--m), var(--m)) bottom left / 12px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) bottom left / 1px 12px no-repeat,
+    linear-gradient(var(--m), var(--m)) bottom right / 12px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) bottom right / 1px 12px no-repeat;
+}
+
+/*
+  "Stacked sheet" elevation: an offset shadow like a label on a box, but
+  warm, translucent and slightly blurred, over a faint ambient shadow.
+  Cards lift up-left on hover and the sheet behind them shows more.
+*/
+:root {
+  --sheet: rgb(90 70 35 / 0.13);
+  --ambient: 0 1px 2px rgb(60 45 20 / 0.05), 0 14px 30px -18px rgb(60 45 20 / 0.2);
+}
+.shadow-card {
+  box-shadow: 5px 5px 2px -1px var(--sheet), var(--ambient);
+}
+.shadow-sheet-lg {
+  box-shadow: 12px 12px 3px -2px rgb(90 70 35 / 0.11), 0 2px 4px rgb(60 45 20 / 0.05), 0 40px 70px -35px rgb(60 45 20 / 0.3);
+}
+.shadow-sheet-pine {
+  box-shadow: 10px 10px 3px -2px rgb(21 38 31 / 0.2), 0 30px 60px -30px rgb(21 38 31 / 0.5);
+}
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s;
+}
+.hover-lift:hover {
+  transform: translate(-2px, -2px);
+  border-color: var(--color-gray-300);
+  box-shadow: 8px 8px 3px -1px rgb(90 70 35 / 0.16), var(--ambient);
+}
+
+/* Action buttons: a darker orange "edge" offset, so they read as pressable. */
+.shadow-press {
+  box-shadow: 3px 3px 1px 0 rgb(122 40 7 / 0.32), 0 10px 22px -12px rgb(194 65 12 / 0.55);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s;
+}
+.shadow-press:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 1px 0 rgb(122 40 7 / 0.32), 0 14px 26px -12px rgb(194 65 12 / 0.6);
+}
+.shadow-press:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 rgb(122 40 7 / 0.32);
+}
+
+/* Highlighted word sits on a strip of packing tape that unrolls on load. */
+.tape {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.18em;
+  z-index: 0;
+}
+.tape::before {
+  content: "";
+  position: absolute;
+  inset: 0.12em -0.05em 0.02em;
+  z-index: -1;
+  background: var(--color-emerald-200);
+  transform: rotate(-1.2deg);
+  transform-origin: left center;
+  animation: tape-unroll 0.7s cubic-bezier(0.7, 0, 0.2, 1) 0.65s both;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 0.3em, black calc(100% - 0.3em), transparent);
+  mask-image: linear-gradient(90deg, transparent, black 0.3em, black calc(100% - 0.3em), transparent);
+}
+@keyframes tape-unroll {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Staggered entrance: set --i on each element for its place in the queue. */
+.reveal {
+  animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 60ms);
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(6px);
   }
 }
 
@@ -118,7 +319,9 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
-  .page-enter {
+  .page-enter,
+  .reveal,
+  .tape::before {
     animation: none;
   }
 
@@ -238,7 +441,7 @@ html {
   --chart-3: hsl(197 37% 24%);
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
-  --radius: 0.6rem;
+  --radius: 0.5rem;
 }
 
 /*

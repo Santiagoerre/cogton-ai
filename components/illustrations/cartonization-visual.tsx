@@ -35,17 +35,17 @@ const BOX: Vec = [10, 8, 6];
 
 // Sorted back to front.
 const items: { at: Vec; size: Vec; colors: [string, string, string] }[] = [
-  { at: [0, 0, 0], size: [6, 8, 3], colors: ['#a7f3d0', '#34d399', '#6ee7b7'] },
-  { at: [0, 0, 3], size: [5, 4, 2], colors: ['#fde68a', '#f59e0b', '#fbbf24'] },
-  { at: [6, 0, 0], size: [4, 4, 4], colors: ['#c7d2fe', '#6366f1', '#818cf8'] },
-  { at: [6, 4, 0], size: [4, 4, 2], colors: ['#a7f3d0', '#10b981', '#34d399'] }
+  { at: [0, 0, 0], size: [6, 8, 3], colors: ['#B4DCC3', '#57AD7E', '#86C6A0'] },
+  { at: [0, 0, 3], size: [5, 4, 2], colors: ['#EBD7A4', '#B8862B', '#D0A44E'] },
+  { at: [6, 0, 0], size: [4, 4, 4], colors: ['#CAD6E2', '#5B7896', '#7E97B0'] },
+  { at: [6, 4, 0], size: [4, 4, 2], colors: ['#B4DCC3', '#339466', '#57AD7E'] }
 ];
 
 export async function CartonizationVisual({ compact = false }: { compact?: boolean }) {
   const { visuals: t } = await getDict();
   const [W, D, H] = BOX;
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-xl shadow-gray-200/60 ring-1 ring-gray-200">
+    <div className="rounded-2xl bg-white p-6 shadow-card ring-1 ring-gray-200">
       <div className="flex items-center justify-between text-sm">
         <span className="font-semibold text-gray-900">{t.order}</span>
         <span className="text-gray-500">{t.items}</span>
@@ -57,7 +57,7 @@ export async function CartonizationVisual({ compact = false }: { compact?: boole
         aria-label={t.cartonAlt}
       >
         {/* back edges of the box */}
-        <g stroke="#9ca3af" strokeWidth="1.2" strokeDasharray="4 4" fill="none">
+        <g stroke="#A89D88" strokeWidth="1.2" strokeDasharray="4 4" fill="none">
           <polyline points={poly([[0, D, 0], [0, 0, 0], [W, 0, 0]])} />
           <polyline points={poly([[0, 0, 0], [0, 0, H]])} />
         </g>
@@ -65,7 +65,7 @@ export async function CartonizationVisual({ compact = false }: { compact?: boole
           <Cuboid key={i} {...item} />
         ))}
         {/* front edges of the box */}
-        <g stroke="#374151" strokeWidth="1.5" fill="none" strokeLinejoin="round">
+        <g stroke="#433C31" strokeWidth="1.5" fill="none" strokeLinejoin="round">
           <polygon points={poly([[0, 0, H], [W, 0, H], [W, D, H], [0, D, H]])} />
           <polyline points={poly([[W, 0, H], [W, 0, 0], [W, D, 0], [0, D, 0], [0, D, H]])} />
           <polyline points={poly([[W, D, 0], [W, D, H]])} />

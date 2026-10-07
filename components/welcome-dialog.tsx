@@ -42,7 +42,7 @@ export function WelcomeDialog({ initiallyOpen }: { initiallyOpen: boolean }) {
           <button
             type="button"
             onClick={() => answer('all')}
-            className="h-11 shrink-0 sm:flex-1 cursor-pointer rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-600 px-4 text-sm font-semibold text-white shadow-md shadow-emerald-900/15 outline-none hover:from-emerald-600 hover:to-emerald-700 focus-visible:ring-4 focus-visible:ring-emerald-200"
+            className="h-11 shrink-0 sm:flex-1 cursor-pointer rounded-xl bg-action px-4 text-sm font-semibold text-white shadow-press outline-none hover:bg-action-hover focus-visible:ring-4 focus-visible:ring-emerald-200"
           >
             {t.accept}
           </button>

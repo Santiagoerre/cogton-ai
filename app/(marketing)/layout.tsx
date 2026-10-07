@@ -27,6 +27,15 @@ function useNavLinks() {
   ];
 }
 
+// Active link gets a pine underline instead of a color swap.
+function navLinkClass(active: boolean) {
+  return `relative text-[0.95rem] font-medium outline-none transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-emerald-500 after:transition-all ${
+    active
+      ? 'text-gray-900 after:w-full'
+      : 'text-gray-600 hover:text-gray-900 after:w-0 hover:after:w-full'
+  }`;
+}
+
 function ProductMenu({ active }: { active: boolean }) {
   const { header, products: productTexts } = useDict();
   const products = localizeProducts(productTexts);
@@ -35,9 +44,7 @@ function ProductMenu({ active }: { active: boolean }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const triggerClass = `flex items-center gap-1 text-base font-medium outline-none transition-colors ${
-    active ? 'text-emerald-600' : 'text-gray-700 hover:text-gray-900'
-  }`;
+  const triggerClass = `flex items-center gap-1 ${navLinkClass(active)}`;
 
   if (!mounted) {
     return (
@@ -75,7 +82,7 @@ function DemoButton({ className = '' }: { className?: string }) {
       href={DEMO_BOOKING_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-600 px-4 text-sm font-semibold text-white shadow-md shadow-emerald-900/15 ring-1 ring-inset ring-white/15 transition-colors outline-none hover:from-emerald-600 hover:to-emerald-700 focus-visible:ring-4 focus-visible:ring-emerald-200 ${className}`}
+      className={`inline-flex h-10 items-center justify-center rounded-lg bg-action px-4 text-sm font-semibold text-white shadow-press outline-none hover:bg-action-hover focus-visible:ring-4 focus-visible:ring-action/25 ${className}`}
     >
       {header.bookDemo}
     </a>
@@ -92,16 +99,16 @@ function Header() {
   useEffect(() => setIsNavOpen(false), [pathname]);
 
   return (
-    <header className="border-b border-gray-200 bg-white sticky top-0 z-40">
+    <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center">
           <LogoMark className="h-7 w-7" />
-          <span className="ml-2 text-xl font-semibold text-gray-900">
-            Cogton AI
+          <span className="ml-2.5 text-xl font-extrabold tracking-tight text-gray-900 [font-stretch:125%] [font-variation-settings:'wdth'_125]">
+            Cogton<span className="text-emerald-500">.</span>AI
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-9">
           {navLinks.map((link) =>
             link.children ? (
               <ProductMenu
@@ -112,11 +119,7 @@ function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-base font-medium transition-colors ${
-                pathname === link.href
-                  ? 'text-emerald-600'
-                  : 'text-gray-700 hover:text-gray-900'
-              }`}
+              className={navLinkClass(pathname === link.href)}
             >
               {link.label}
             </Link>
@@ -149,7 +152,7 @@ function Header() {
           {navLinks.map((link) =>
             link.children ? (
               <div key={link.href} className="py-2">
-                <p className="py-1 text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <p className="py-1 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-gray-500">
                   {link.label}
                 </p>
                 {link.children.map((child) => (
@@ -158,7 +161,7 @@ function Header() {
                     href={child.href}
                     onClick={() => setIsNavOpen(false)}
                     className={`block py-2.5 pl-3 text-base font-medium ${
-                      pathname === child.href ? 'text-emerald-600' : 'text-gray-700'
+                      pathname === child.href ? 'text-gray-900 underline decoration-emerald-500 decoration-2 underline-offset-4' : 'text-gray-700'
                     }`}
                   >
                     {child.name}
@@ -171,7 +174,7 @@ function Header() {
                 href={link.href}
                 onClick={() => setIsNavOpen(false)}
                 className={`block py-2.5 text-base font-medium ${
-                  pathname === link.href ? 'text-emerald-600' : 'text-gray-700'
+                  pathname === link.href ? 'text-gray-900 underline decoration-emerald-500 decoration-2 underline-offset-4' : 'text-gray-700'
                 }`}
               >
                 {link.label}

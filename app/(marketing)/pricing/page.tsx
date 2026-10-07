@@ -9,12 +9,12 @@ export default async function PricingPage() {
 
   return (
     <main className="bg-white">
-      <section className="bg-gradient-to-b from-emerald-50 to-white">
+      <section className="bg-dieline border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-14 sm:pt-24 sm:pb-16">
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-600">
             {t.eyebrow}
           </p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
             {t.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl">
@@ -33,12 +33,12 @@ export default async function PricingPage() {
         </div>
       </section>
 
-      <section id="cotizar" className="bg-gray-950 py-16 sm:py-20 scroll-mt-16">
+      <section id="cotizar" className="bg-flutes py-16 sm:py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-8 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-7">
             <QuoteForm />
           </div>
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-6 sm:p-10 lg:col-span-5 lg:sticky lg:top-24">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-10 lg:col-span-5 lg:sticky lg:top-24">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">
               {t.factorsTitle}
             </h2>
@@ -58,7 +58,7 @@ export default async function PricingPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-14 sm:py-20">
+      <section className="bg-kraft py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title={t.calcTitle}
@@ -79,7 +79,7 @@ export default async function PricingPage() {
             {t.steps.map(({ title, description }, i) => (
               <li
                 key={title}
-                className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8"
+                className="rounded-xl border border-gray-200 bg-white p-6 shadow-card sm:p-8"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-emerald-300 bg-white text-lg font-semibold text-gray-900 shadow-md shadow-emerald-100">
                   {i + 1}
@@ -96,11 +96,11 @@ export default async function PricingPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-14 sm:py-24">
+      <section className="bg-kraft py-14 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="text-sm font-semibold text-emerald-600">FAQ</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:mt-4 sm:text-5xl">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-600">FAQ</p>
+            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:mt-4 sm:text-5xl">
               {t.faqTitle}
             </h2>
           </div>

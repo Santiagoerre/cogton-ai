@@ -21,7 +21,7 @@ export default async function ContactPage() {
         <div className="grid gap-4 sm:gap-6 sm:grid-cols-3">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="rounded-xl border border-gray-200 p-6 text-center hover:border-emerald-600 transition-colors"
+            className="hover-lift shadow-card rounded-xl border border-gray-200 bg-white p-6 text-center"
           >
             <Mail className="h-6 w-6 mx-auto text-emerald-600" />
             <h3 className="mt-4 font-medium text-gray-900">{t.email}</h3>
@@ -32,7 +32,7 @@ export default async function ContactPage() {
             href={DEMO_BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-gray-200 p-6 text-center hover:border-emerald-600 transition-colors"
+            className="hover-lift shadow-card rounded-xl border border-gray-200 bg-white p-6 text-center"
           >
             <Calendar className="h-6 w-6 mx-auto text-emerald-600" />
             <h3 className="mt-4 font-medium text-gray-900">{t.bookDemo}</h3>
@@ -43,7 +43,7 @@ export default async function ContactPage() {
             href={LINKEDIN_COMPANY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-gray-200 p-6 text-center hover:border-emerald-600 transition-colors"
+            className="hover-lift shadow-card rounded-xl border border-gray-200 bg-white p-6 text-center"
           >
             <Linkedin className="h-6 w-6 mx-auto text-emerald-600" />
             <h3 className="mt-4 font-medium text-gray-900">{t.linkedin}</h3>

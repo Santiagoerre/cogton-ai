@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+import { Archivo, Martian_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { I18nProvider } from '@/lib/i18n/client';
 import { getDict, getLocale, needsWelcome } from '@/lib/i18n/server';
@@ -26,12 +26,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#ffffff'
+  themeColor: '#fffcf5'
 };
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
-const manrope = Manrope({ subsets: ['latin'] });
+// Archivo carries a width axis: body text runs normal, headings run expanded.
+const archivo = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-archivo' });
+const martian = Martian_Mono({ subsets: ['latin'], variable: '--font-martian' });
 
 export default async function RootLayout({
   children
@@ -46,7 +48,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
+      className={`bg-white text-gray-900 font-sans ${archivo.variable} ${martian.variable}`}
     >
       <body className="min-h-[100dvh] bg-gray-50">
         <I18nProvider locale={locale} dict={dict}>

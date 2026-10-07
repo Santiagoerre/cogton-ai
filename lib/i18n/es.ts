@@ -52,6 +52,7 @@ export const es = {
     back: 'Volver al inicio'
   },
   home: {
+    heroEyebrow: 'Optimización de embalaje con IA · 3PL y e-commerce',
     heroTitle: 'El embalaje correcto,',
     heroHighlight: 'automáticamente',
     heroBody:

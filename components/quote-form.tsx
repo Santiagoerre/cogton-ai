@@ -8,10 +8,10 @@ import { useDict } from '@/lib/i18n/client';
 import { es } from '@/lib/i18n/es';
 
 const inputClass =
-  'mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100';
+  'mt-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 outline-none transition-colors focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100';
 
 const cardClass =
-  'rounded-2xl bg-white p-6 shadow-xl shadow-gray-200/60 ring-1 ring-gray-200 sm:p-10';
+  'rounded-2xl border border-gray-200 bg-white p-6 shadow-card sm:p-10';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -57,7 +57,7 @@ export function QuoteForm({ title }: { title?: string }) {
             href={LINKEDIN_COMPANY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-gray-200 p-6 text-center transition-colors hover:border-emerald-600"
+            className="hover-lift shadow-card rounded-xl border border-gray-200 bg-white p-6 text-center"
           >
             <Linkedin className="mx-auto h-6 w-6 text-emerald-600" />
             <h3 className="mt-4 font-medium text-gray-900">{t.followTitle}</h3>
@@ -67,7 +67,7 @@ export function QuoteForm({ title }: { title?: string }) {
             href={LINKEDIN_FOUNDER_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-gray-200 p-6 text-center transition-colors hover:border-emerald-600"
+            className="hover-lift shadow-card rounded-xl border border-gray-200 bg-white p-6 text-center"
           >
             <MessageCircle className="mx-auto h-6 w-6 text-emerald-600" />
             <h3 className="mt-4 font-medium text-gray-900">{t.founderTitle}</h3>
@@ -130,7 +130,7 @@ export function QuoteForm({ title }: { title?: string }) {
                 type="checkbox"
                 name="goals"
                 value={es.quoteForm.goals[i]}
-                className="h-5 w-5 accent-emerald-600"
+                className="h-5 w-5 accent-[var(--color-action)]"
               />
               {goal}
             </label>
@@ -153,7 +153,7 @@ export function QuoteForm({ title }: { title?: string }) {
           type="checkbox"
           name="consent"
           required
-          className="h-5 w-5 flex-shrink-0 accent-emerald-600"
+          className="h-5 w-5 flex-shrink-0 accent-[var(--color-action)]"
         />
         {t.consent}
       </label>
@@ -171,7 +171,7 @@ export function QuoteForm({ title }: { title?: string }) {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className={ctaClassName('green', 'mt-8 cursor-pointer disabled:cursor-wait disabled:opacity-70')}
+        className={ctaClassName('light', 'mt-8 cursor-pointer disabled:cursor-wait disabled:opacity-70')}
       >
         {status === 'sending' ? t.sending : t.submit}
         <CtaArrow />

@@ -53,7 +53,7 @@ export default async function CartonizationPage() {
           />
           <ol className="grid gap-6 md:grid-cols-3">
             {t.steps.map(({ title, description }, i) => (
-              <li key={title} className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
+              <li key={title} className="rounded-xl border border-gray-200 bg-white p-6 shadow-card sm:p-8">
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-emerald-300 bg-white text-lg font-semibold text-gray-900 shadow-md shadow-emerald-100">
                   {i + 1}
                 </span>
@@ -65,7 +65,7 @@ export default async function CartonizationPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-14 sm:py-20">
+      <section className="bg-kraft py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow={t.constraintsEyebrow}
@@ -94,7 +94,7 @@ export default async function CartonizationPage() {
             {t.goals.map(({ title, description }, i) => {
               const Icon = goalIcons[i];
               return (
-              <div key={title} className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
+              <div key={title} className="rounded-xl border border-gray-200 bg-white p-6 shadow-card sm:p-8">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -115,7 +115,7 @@ export default async function CartonizationPage() {
             subtitle={t.integrationSubtitle}
           />
           <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-gray-200 p-6 sm:p-8">
+            <div className="rounded-xl border border-gray-200 p-6 sm:p-8">
               <Plug className="h-6 w-6 text-emerald-600" />
               <h3 className="mt-5 text-lg font-semibold text-gray-900">
                 {t.apiTitle}
@@ -124,7 +124,7 @@ export default async function CartonizationPage() {
                 {t.apiBody}
               </p>
             </div>
-            <div className="rounded-2xl border border-gray-200 p-6 sm:p-8">
+            <div className="rounded-xl border border-gray-200 p-6 sm:p-8">
               <FileSpreadsheet className="h-6 w-6 text-emerald-600" />
               <h3 className="mt-5 text-lg font-semibold text-gray-900">
                 {t.csvTitle}

@@ -41,12 +41,12 @@ export default async function CatalogueOptimiserPage() {
             {t.levels.map(({ label, title, description, points }, i) => {
               const Icon = levelIcons[i];
               return (
-              <div key={title} className="rounded-2xl border border-gray-200 p-6 sm:p-10">
+              <div key={title} className="rounded-xl border border-gray-200 p-6 sm:p-10">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-sm font-semibold uppercase tracking-widest text-gray-400">
+                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">
                     {label}
                   </span>
                 </div>
@@ -67,13 +67,13 @@ export default async function CatalogueOptimiserPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-14 sm:py-20">
+      <section className="bg-kraft py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
-            <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-600">
               {t.deliverableEyebrow}
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               {t.deliverableTitle}
             </h2>
             <p className="mt-4 text-lg text-gray-500">

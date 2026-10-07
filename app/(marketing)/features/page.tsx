@@ -37,7 +37,7 @@ export default async function FeaturesPage() {
                 key={feature.title}
                 className="bg-white rounded-xl border border-gray-200 p-6"
               >
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-emerald-600 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
                   <feature.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 text-lg font-medium text-gray-900">
