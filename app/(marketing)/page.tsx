@@ -69,7 +69,7 @@ export default async function HomePage() {
             <div className="md:max-w-2xl lg:col-span-6">
               <Eyebrow className="reveal">{t.heroEyebrow}</Eyebrow>
               <h1
-                className="reveal mt-6 text-4xl font-extrabold leading-[1.02] text-gray-900 sm:text-5xl md:text-6xl lg:text-[3.1rem] xl:text-[3.6rem]"
+                className="reveal mt-6 text-[clamp(1.5rem,8.4vw,2.25rem)] max-sm:[font-stretch:110%] max-sm:[font-variation-settings:'wdth'_110] font-extrabold leading-[1.04] text-gray-900 sm:text-5xl md:text-6xl lg:text-[3.1rem] xl:text-[3.6rem]"
                 style={{ '--i': 1 } as CSSProperties}
               >
                 {t.heroTitle}{' '}
@@ -98,7 +98,7 @@ export default async function HomePage() {
                     <span className="ml-3 truncate text-gray-500">
                       {t.windowTitle}
                     </span>
-                    <span className="ml-auto flex items-center gap-1.5 text-emerald-700">
+                    <span className="ml-auto flex shrink-0 items-center gap-1.5 whitespace-nowrap text-emerald-700">
                       <span className="relative flex h-2 w-2">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60 motion-reduce:animate-none" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
