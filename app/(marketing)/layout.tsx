@@ -134,7 +134,7 @@ function Header() {
 
         <button
           type="button"
-          className="md:hidden -mr-2 p-2 text-gray-700"
+          className="md:hidden -mr-2.5 p-2.5 text-gray-700"
           onClick={() => setIsNavOpen((open) => !open)}
           aria-label={isNavOpen ? header.closeMenu : header.openMenu}
           aria-expanded={isNavOpen}
@@ -152,7 +152,7 @@ function Header() {
           {navLinks.map((link) =>
             link.children ? (
               <div key={link.href} className="py-2">
-                <p className="py-1 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-gray-500">
+                <p className="py-1 font-mono text-xs uppercase tracking-[0.18em] text-gray-500">
                   {link.label}
                 </p>
                 {link.children.map((child) => (
@@ -192,13 +192,10 @@ function Header() {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
   return (
     <section className="flex flex-col min-h-screen">
       <Header />
-      {/* Keyed by route so the enter animation replays on every navigation. */}
-      <div key={pathname} className="page-enter flex-1">
+      <div className="flex-1">
         {children}
       </div>
       <Footer />

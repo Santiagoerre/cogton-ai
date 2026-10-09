@@ -38,7 +38,7 @@ export function SavingsCalculator() {
             onChange={(e) => setOrders(Number(e.target.value))}
             className="mt-3 h-8 w-full accent-[var(--color-action)]"
           />
-          <div className="mt-1 flex justify-between text-xs text-gray-400">
+          <div className="mt-1 flex justify-between text-xs text-gray-500">
             <span>{formatNumber(1000)}</span>
             <span>{formatNumber(100000)}</span>
           </div>

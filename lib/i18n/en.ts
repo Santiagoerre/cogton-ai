@@ -15,7 +15,7 @@ export const en: Dict = {
     essential: 'Essential only'
   },
   common: {
-    demoRequest: 'Request a demo',
+    demoRequest: 'Book a demo',
     seePricing: 'See pricing',
     results: 'Results',
     howItWorks: 'How it works',
@@ -61,6 +61,8 @@ export const en: Dict = {
     windowTitle: 'Cogton AI · Packaging recommendation',
     live: 'Live',
     integratesWith: 'Integrates with',
+    pauseLogos: 'Pause logos',
+    playLogos: 'Play logos',
     productsEyebrow: 'Products',
     productsTitle: 'Two ways to optimize your packaging',
     productsSubtitle:
@@ -378,7 +380,7 @@ export const en: Dict = {
     ],
     ctaTitle: 'Try it with your orders',
     ctaSubtitle: 'We show you which box Cogton would choose for your real orders.',
-    ctaLabel: 'Request a demo'
+    ctaLabel: 'Book a demo'
   },
   catalogue: {
     metaTitle:

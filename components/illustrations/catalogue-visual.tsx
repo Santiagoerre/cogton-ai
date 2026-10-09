@@ -14,7 +14,7 @@ export async function CatalogueVisual() {
       </div>
       <table className="mt-5 w-full text-left text-sm">
         <thead>
-          <tr className="text-xs uppercase tracking-wider text-gray-400">
+          <tr className="text-xs uppercase tracking-wider text-gray-500">
             <th className="pb-3 font-medium">{t.colProduct}</th>
             <th className="pb-3 font-medium">{t.colToday}</th>
             <th className="pb-3 font-medium">{t.colRecommended}</th>
@@ -24,7 +24,7 @@ export async function CatalogueVisual() {
           {rows.map(({ sku, today, recommended, changed }) => (
             <tr key={sku}>
               <td className="py-3 pr-3 font-medium text-gray-900">{sku}</td>
-              <td className="py-3 pr-3 text-gray-400">{today}</td>
+              <td className="py-3 pr-3 text-gray-500">{today}</td>
               <td className="py-3">
                 <span
                   className={`inline-block whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ${

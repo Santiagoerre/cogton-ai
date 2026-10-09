@@ -26,19 +26,19 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-emerald-300">
+            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-emerald-300">
               {footer.product}
             </h3>
-            <ul className="mt-3 space-y-1 sm:mt-4 sm:space-y-3">
+            <ul className="mt-1 sm:mt-4 sm:space-y-3">
               {products.map((product) => (
                 <li key={product.href}>
-                  <Link href={product.href} className="inline-block py-1.5 text-sm text-emerald-50/80 hover:text-white sm:py-0">
+                  <Link href={product.href} className="inline-block py-3 text-sm text-emerald-50/80 hover:text-white sm:py-0">
                     {product.name}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/pricing" className="inline-block py-1.5 text-sm text-emerald-50/80 hover:text-white sm:py-0">
+                <Link href="/pricing" className="inline-block py-3 text-sm text-emerald-50/80 hover:text-white sm:py-0">
                   {header.pricing}
                 </Link>
               </li>
@@ -46,12 +46,12 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-emerald-300">
+            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-emerald-300">
               {footer.company}
             </h3>
-            <ul className="mt-3 space-y-1 sm:mt-4 sm:space-y-3">
+            <ul className="mt-1 sm:mt-4 sm:space-y-3">
               <li>
-                <Link href="/contact" className="inline-block py-1.5 text-sm text-emerald-50/80 hover:text-white sm:py-0">
+                <Link href="/contact" className="inline-block py-3 text-sm text-emerald-50/80 hover:text-white sm:py-0">
                   {header.contact}
                 </Link>
               </li>

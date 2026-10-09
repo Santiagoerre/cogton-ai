@@ -8,7 +8,7 @@ import { useDict } from '@/lib/i18n/client';
 import { es } from '@/lib/i18n/es';
 
 const inputClass =
-  'mt-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 outline-none transition-colors focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100';
+  'mt-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 placeholder:text-gray-500 outline-none transition-colors focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100';
 
 const cardClass =
   'rounded-2xl border border-gray-200 bg-white p-6 shadow-card sm:p-10';
