@@ -379,7 +379,7 @@ export const es = {
       'Empaque más rápido',
       'Costo de envío conocido antes de despachar'
     ],
-    ctaTitle: 'Probalo con tus pedidos',
+    ctaTitle: 'Pruébalo con tus pedidos',
     ctaSubtitle: 'Te mostramos qué caja elegiría Cogton para tus pedidos reales.',
     ctaLabel: 'Agendar demo'
   },

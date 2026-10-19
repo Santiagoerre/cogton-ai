@@ -177,7 +177,7 @@ export default async function HomePage() {
                       </li>
                     ))}
                   </ul>
-                  <span className="mt-8 inline-flex items-center self-start border-b-2 border-action/30 pb-0.5 font-semibold text-action transition-colors group-hover:border-action">
+                  <span className="mt-8 inline-flex items-center self-start border-b-2 border-emerald-500/40 pb-0.5 font-semibold text-gray-900 transition-colors group-hover:border-emerald-500">
                     {common.learnMore}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
