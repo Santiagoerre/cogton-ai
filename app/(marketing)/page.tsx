@@ -69,7 +69,7 @@ export default async function HomePage() {
             <div className="md:max-w-2xl lg:col-span-6">
               <Eyebrow className="reveal">{t.heroEyebrow}</Eyebrow>
               <h1
-                className="reveal mt-6 text-[clamp(1.5rem,8.4vw,2.25rem)] max-sm:[font-stretch:110%] max-sm:[font-variation-settings:'wdth'_110] font-extrabold leading-[1.04] text-gray-900 sm:text-5xl md:text-6xl lg:text-[3.1rem] xl:text-[3.6rem]"
+                className="reveal mt-6 text-[clamp(1.5rem,8.4vw,2.25rem)] max-sm:[font-stretch:110%] max-sm:[font-variation-settings:'wdth'_110] font-extrabold leading-[1.04] text-gray-900 sm:text-5xl md:text-6xl lg:text-[2.5rem] xl:text-[3.1rem]"
                 style={{ '--i': 1 } as CSSProperties}
               >
                 {t.heroTitle}{' '}
@@ -91,7 +91,7 @@ export default async function HomePage() {
             >
               <div className="crop-marks">
                 <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sheet-lg">
-                  <div className="flex items-center gap-1.5 border-b border-gray-200 bg-gray-50 px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-[0.16em]">
+                  <div className="flex items-center gap-1.5 border-b border-gray-200 bg-gray-50 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.16em]">
                     <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
                     <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
                     <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
@@ -118,7 +118,7 @@ export default async function HomePage() {
 
       <section className="py-6 sm:py-10 bg-white border-y border-gray-200">
         <Eyebrow className="mb-4 justify-center sm:mb-6">{t.integratesWith}</Eyebrow>
-        <Marquee duration={60}>
+        <Marquee duration={60} pauseLabel={t.pauseLogos} playLabel={t.playLogos}>
           {wmsPlatforms.map(({ name, logo, h, label }) => (
             <span
               key={name}
@@ -160,8 +160,7 @@ export default async function HomePage() {
                   <div className="mx-auto w-full max-w-md">{product.visual}</div>
                 </div>
                 <div className="flex flex-1 flex-col p-6 sm:p-10">
-                  <Eyebrow>{product.label}</Eyebrow>
-                  <h3 className="mt-4 text-xl font-extrabold text-gray-900 sm:text-2xl">
+                  <h3 className="text-xl font-extrabold text-gray-900 sm:text-2xl">
                     {product.name}
                   </h3>
                   <p className="mt-1 text-lg font-medium text-gray-700">
@@ -178,7 +177,7 @@ export default async function HomePage() {
                       </li>
                     ))}
                   </ul>
-                  <span className="mt-8 inline-flex items-center self-start border-b-2 border-action/30 pb-0.5 font-semibold text-action transition-colors group-hover:border-action">
+                  <span className="mt-8 inline-flex items-center self-start border-b-2 border-emerald-500/40 pb-0.5 font-semibold text-gray-900 transition-colors group-hover:border-emerald-500">
                     {common.learnMore}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
@@ -200,7 +199,7 @@ export default async function HomePage() {
             {steps.map(({ icon, title, description }, i) => (
               <li key={title} className="relative border-b border-dashed border-gray-300 py-8 last:border-b-0 sm:border-b-0 sm:px-8 sm:first:pl-0 sm:last:pr-0">
                 <div className="flex items-start justify-between">
-                  <span className="font-mono text-5xl font-light leading-none text-gray-300">
+                  <span className="font-mono text-5xl font-light leading-none text-gray-400">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div className="[&_svg]:mx-0">{icon}</div>

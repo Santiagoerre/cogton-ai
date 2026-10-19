@@ -74,7 +74,7 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        'flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.18em] sm:text-xs',
+        'flex items-center gap-2.5 font-mono text-xs font-medium uppercase tracking-[0.18em]',
         dark ? 'text-emerald-300' : 'text-gray-600',
         className
       )}
@@ -127,7 +127,7 @@ export function CtaBanner({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* A shipping label: ink body, perforated tear line, mono routing strip. */}
         <div className="bg-flutes shadow-sheet-pine overflow-hidden rounded-2xl">
-          <div className="flex items-center justify-between gap-4 border-b border-dashed border-white/15 px-6 py-3 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-gray-400 sm:px-12">
+          <div className="flex items-center justify-between gap-4 border-b border-dashed border-white/15 px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-gray-400 sm:px-12">
             <span>Cogton AI</span>
             <span aria-hidden className="hidden sm:inline">▮▮▯▮▯▯▮▮▮▯▮▯▮▮▯▯▮</span>
             <span className="text-emerald-300">Priority</span>

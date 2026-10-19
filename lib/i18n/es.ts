@@ -13,7 +13,7 @@ export const es = {
     essential: 'Solo esenciales'
   },
   common: {
-    demoRequest: 'Solicitar demo',
+    demoRequest: 'Agendar demo',
     seePricing: 'Ver precios',
     results: 'Resultados',
     howItWorks: 'Cómo funciona',
@@ -60,6 +60,8 @@ export const es = {
     windowTitle: 'Cogton AI · Recomendación de embalaje',
     live: 'En vivo',
     integratesWith: 'Se integra con',
+    pauseLogos: 'Pausar logos',
+    playLogos: 'Reanudar logos',
     productsEyebrow: 'Productos',
     productsTitle: 'Dos formas de optimizar tu embalaje',
     productsSubtitle:
@@ -377,9 +379,9 @@ export const es = {
       'Empaque más rápido',
       'Costo de envío conocido antes de despachar'
     ],
-    ctaTitle: 'Probalo con tus pedidos',
+    ctaTitle: 'Pruébalo con tus pedidos',
     ctaSubtitle: 'Te mostramos qué caja elegiría Cogton para tus pedidos reales.',
-    ctaLabel: 'Solicitar demo'
+    ctaLabel: 'Agendar demo'
   },
   catalogue: {
     metaTitle:
